@@ -8,16 +8,20 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activities.MainActivity"
+            android:label="DiveBox"/>
         <activity
-            android:name=".LoginActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".activities.LoginActivity"
+            android:label="Login To DiveBox">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.CreateDiveActivity"
+            android:label="Log A New Dive"/>
+        <activity android:name=".activities.ViewDiveActivity"
+            android:label="View A Dive"></activity>
     </application>
 
 </manifest>
