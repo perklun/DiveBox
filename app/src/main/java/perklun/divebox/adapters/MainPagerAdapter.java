@@ -16,7 +16,6 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
     private static int NUM_ITEMS = 3;
     private String tabTitles[] = new String[] { "Feed", "Dives", "Profile" };
 
-
     public MainPagerAdapter(FragmentManager fm) {
         super(fm);
     }
@@ -24,11 +23,11 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position) {
-            case 0: // Fragment # 0 - This will show FirstFragment
+            case 0:
                 return TweetFrag.newInstance();
-            case 1: // Fragment # 0 - This will show FirstFragment different title
+            case 1:
                 return DiveFrag.newInstance();
-            case 2: // Fragment # 0 - This will show FirstFragment different title
+            case 2:
                 return ProfileFrag.newInstance();
             default:
                 return null;

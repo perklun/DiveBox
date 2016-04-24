@@ -1,7 +1,9 @@
 package perklun.divebox.activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,6 +32,10 @@ public class LoginActivity extends AppCompatActivity implements
     private static final int RC_SIGN_IN = 9001;
     private static final String TAG = "SignInActivity";
 
+    private SharedPreferences mSettings;
+    private SharedPreferences.Editor mSettingEditior;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +58,9 @@ public class LoginActivity extends AppCompatActivity implements
         signInButton.setScopes(gso.getScopeArray());
         //Register sign in button
         findViewById(R.id.sign_in_button).setOnClickListener(this);
+        // Shared Preferences
+        mSettings = getSharedPreferences(getString(R.string.SHARED_PREFERENCE_FILE_KEY), Context.MODE_PRIVATE);
+        mSettingEditior = mSettings.edit();
     }
 
     //Obtain previous login
@@ -125,13 +134,13 @@ public class LoginActivity extends AppCompatActivity implements
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
+            mSettingEditior.putString(getString(R.string.SHARED_PREF_USERNAME_KEY), acct.getDisplayName());
+            mSettingEditior.commit();
             Intent i = new Intent(this, MainActivity.class);
             finish();
             startActivity(i);
-            //mStatusTextVie
-            // w.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
-            //updateUI(true);
         } else {
+            //TODO: what happens when the result isn't success, maybe put a toast?
             // Signed out, show unauthenticated UI.
             //updateUI(false);
         }

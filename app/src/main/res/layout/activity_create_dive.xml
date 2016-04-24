@@ -9,4 +9,28 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="perklun.divebox.activities.CreateDiveActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Dive title"
+        android:id="@+id/tv_dive_title_label"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_input_title"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/tv_dive_title_label"
+        android:layout_toEndOf="@+id/tv_dive_title_label" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_create_dive_submit"
+        android:text="@string/create_dive_submit"
+        android:layout_below="@+id/et_input_title"/>
 </RelativeLayout>
