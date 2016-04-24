@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_id": "divebox-28da4",
+    "project_number": "371595055516",
+    "name": "DiveBox"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:371595055516:android:d854327dc9583837",
+        "client_id": "android:perklun.divebox",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "perklun.divebox",
+          "certificate_hash": []
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "371595055516-b9pkfjnra5p2va24jnsj5l6jtainefro.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "perklun.divebox",
+            "certificate_hash": "93634ADFB0E2834A514F402B76379E0F17C83BE8"
+          }
+        },
+        {
+          "client_id": "371595055516-k4gniultql6u7cgrc5ut93u058bevdot.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}
