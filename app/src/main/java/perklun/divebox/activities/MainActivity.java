@@ -12,6 +12,7 @@ import android.widget.Toast;
 import perklun.divebox.R;
 import perklun.divebox.adapters.MainPagerAdapter;
 import perklun.divebox.fragments.DiveFrag;
+import perklun.divebox.models.Dive;
 import perklun.divebox.utils.Constants;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,10 +47,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == Constants.REQUEST_CODE_CREATE_DIVE && resultCode == Constants.DB_OPS_SUCCESS) {
             Toast.makeText(this, getString(R.string.MESSAGE_DIVE_CREATE), Toast.LENGTH_SHORT).show();
-            DiveFrag diveFrag = (DiveFrag) adapterMainPager.getItem(1);
-            //TODO: Doesn't update when a new diveFrag is created
-            //diveFrag.updateRecyclerViewAdapter();
-
+            DiveFrag diveFrag = adapterMainPager.getDiveFrag();
+            Dive newDive = data.getParcelableExtra(Constants.DIVE);
+            diveFrag.addDiveUpdateRecyclerViewAdapter(newDive);
         }
     }
 }

@@ -165,11 +165,8 @@ public class DiveBoxDatabaseHelper extends SQLiteOpenHelper{
            if(cursor.moveToFirst()){
                do{
                    //TODO: This looks to be getting all users and their dives
-                   User newUser = new User();
-                   newUser.username = cursor.getString(cursor.getColumnIndex(KEY_DIVE_USER_ID));
-                   Dive newDive = new Dive();
-                   newDive.title = cursor.getString(cursor.getColumnIndex(KEY_DIVE_TITLE));
-                   newDive.user = newUser;
+                   User newUser = new User(cursor.getString(cursor.getColumnIndex(KEY_DIVE_USER_ID)));
+                   Dive newDive = new Dive(newUser, cursor.getString(cursor.getColumnIndex(KEY_DIVE_TITLE)));
                    dives.add(newDive);
                }
                while(cursor.moveToNext());

@@ -13,7 +13,13 @@
     <!-- SharedPref file -->
     <string name="SHARED_PREFERENCE_FILE_KEY">divebox</string>
     <string name="SHARED_PREF_USERNAME_KEY">username</string>
+    <string name="SHARED_PREF_PHOTO_URL_KEY">photo</string>
+    <string name="SHARED_PREF_EMAIL_KEY">email</string>
+    <string name="SHARED_PREF_ID_KEY">id</string>
 
     <!-- Messages -->
     <string name="MESSAGE_DIVE_CREATE">Dive Created!</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

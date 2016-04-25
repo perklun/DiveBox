@@ -3,11 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.ProfileFrag">
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText"
-        android:layout_gravity="left|top"
-        android:text="profile" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv_profile_picture"
+            android:src="@mipmap/ic_launcher"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_profile_name"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/iv_profile_picture"
+            android:layout_toEndOf="@+id/iv_profile_picture" />
+    </RelativeLayout>
 
 </FrameLayout>

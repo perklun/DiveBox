@@ -35,7 +35,6 @@ public class LoginActivity extends AppCompatActivity implements
     private SharedPreferences mSettings;
     private SharedPreferences.Editor mSettingEditior;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +42,7 @@ public class LoginActivity extends AppCompatActivity implements
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
+                .requestProfile()
                 .build();
         // Build a GoogleApiClient with access to the Google Sign-In API and the
         // options specified by gso.
@@ -67,7 +66,6 @@ public class LoginActivity extends AppCompatActivity implements
     @Override
     public void onStart() {
         super.onStart();
-
         OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
         if (opr.isDone()) {
             // If the user's cached credentials are valid, the OptionalPendingResult will be "done"
@@ -79,11 +77,12 @@ public class LoginActivity extends AppCompatActivity implements
             // If the user has not previously signed in on this device or the sign-in has expired,
             // this asynchronous branch will attempt to sign in the user silently.  Cross-device
             // single sign-on will occur in this branch.
-            showProgressDialog();
+            //TODO: causing leaked window, looks like activity was closed while dialog was still open
+            //showProgressDialog();
             opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
                 @Override
                 public void onResult(GoogleSignInResult googleSignInResult) {
-                    hideProgressDialog();
+                    //hideProgressDialog();
                     handleSignInResult(googleSignInResult);
                 }
             });
@@ -135,6 +134,13 @@ public class LoginActivity extends AppCompatActivity implements
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
             mSettingEditior.putString(getString(R.string.SHARED_PREF_USERNAME_KEY), acct.getDisplayName());
+            //Log.d("NAME:", acct.getDisplayName());
+            if(acct.getPhotoUrl() != null){
+                mSettingEditior.putString(getString(R.string.SHARED_PREF_PHOTO_URL_KEY), acct.getPhotoUrl().toString());
+                //Log.d("PHOTO:", acct.getPhotoUrl().toString());
+            }
+            mSettingEditior.putString(getString(R.string.SHARED_PREF_ID_KEY), acct.getId());
+            //Log.d("ID:", acct.getId());
             mSettingEditior.commit();
             Intent i = new Intent(this, MainActivity.class);
             finish();
