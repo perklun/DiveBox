@@ -21,7 +21,6 @@ import perklun.divebox.R;
 public class MapFrag extends Fragment {
     MapView mMapView;
     private GoogleMap googleMap;
-    private SupportMapFragment mapFragment;
     // newInstance constructor for creating fragment with arguments
     public static MapFrag newInstance() {
         MapFrag fragmentFirst = new MapFrag();
@@ -37,7 +36,6 @@ public class MapFrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // inflate and return the layout
-
         View v = inflater.inflate(R.layout.fragment_map, container,false);
         mMapView = (MapView) v.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);

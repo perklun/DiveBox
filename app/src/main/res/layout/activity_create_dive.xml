@@ -27,10 +27,22 @@
         android:layout_toRightOf="@+id/tv_dive_title_label"
         android:layout_toEndOf="@+id/tv_dive_title_label" />
 
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btn_create_dive_submit"
         android:text="@string/create_dive_submit"
-        android:layout_below="@+id/et_input_title"/>
+        android:layout_below="@+id/tv_dive_title_label"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <com.google.android.gms.maps.MapView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/create_mapview"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/create_dive_map_dimensions"
+        android:layout_below="@+id/btn_create_dive_submit"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

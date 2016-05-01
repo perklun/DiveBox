@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +36,8 @@ public class DiveBoxDatabaseHelper extends SQLiteOpenHelper{
     private static final String KEY_DIVE_ID = "id";
     private static final String KEY_DIVE_USER_ID = "userID";
     private static final String KEY_DIVE_TITLE = "title";
+    private static final String KEY_DIVE_LAT = "lat";
+    private static final String KEY_DIVE_LONG = "long";
 
     // Users Table Columns
     private static final String KEY_USER_ID = "id";
@@ -64,7 +68,9 @@ public class DiveBoxDatabaseHelper extends SQLiteOpenHelper{
                 "(" +
                 KEY_DIVE_ID + " INTEGER PRIMARY KEY," + // Define a primary key
                 KEY_DIVE_USER_ID + " INTEGER REFERENCES " + TABLE_USERS + "," + // Define a foreign key
-                KEY_DIVE_TITLE + " TEXT" +
+                KEY_DIVE_TITLE + " TEXT," +
+                KEY_DIVE_LAT + " REAL," +
+                KEY_DIVE_LONG + " REAL" +
                 ")";
 
         String CREATE_USERS_TABLE = "CREATE TABLE " + TABLE_USERS +
@@ -96,6 +102,8 @@ public class DiveBoxDatabaseHelper extends SQLiteOpenHelper{
             ContentValues values = new ContentValues();
             values.put(KEY_DIVE_USER_ID, userId);
             values.put(KEY_DIVE_TITLE, dive.title);
+            values.put(KEY_DIVE_LAT, dive.lat);
+            values.put(KEY_DIVE_LONG, dive.lng);
             //primary key autoincremented
             long diveId = db.insertOrThrow(TABLE_DIVES, null, values);
             Log.d(TAG, "Added dive key" + diveId);
@@ -166,7 +174,8 @@ public class DiveBoxDatabaseHelper extends SQLiteOpenHelper{
                do{
                    //TODO: This looks to be getting all users and their dives
                    User newUser = new User(cursor.getString(cursor.getColumnIndex(KEY_DIVE_USER_ID)));
-                   Dive newDive = new Dive(newUser, cursor.getString(cursor.getColumnIndex(KEY_DIVE_TITLE)));
+                   LatLng position = new LatLng(cursor.getLong(cursor.getColumnIndex(KEY_DIVE_LAT)),cursor.getLong(cursor.getColumnIndex(KEY_DIVE_LONG)));
+                   Dive newDive = new Dive(newUser, cursor.getString(cursor.getColumnIndex(KEY_DIVE_TITLE)), position);
                    dives.add(newDive);
                }
                while(cursor.moveToNext());
