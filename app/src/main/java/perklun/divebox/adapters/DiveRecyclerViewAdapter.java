@@ -43,7 +43,6 @@ public class DiveRecyclerViewAdapter extends RecyclerView.Adapter<DiveRecyclerVi
     public int getItemCount() {
         return mDives.size();
     }
-
     // Viewholder for dive item
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView diveTitle;

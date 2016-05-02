@@ -1,5 +1,6 @@
 package perklun.divebox.adapters;
 
+import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -81,5 +82,9 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
 
     public MapFrag getMapFrag(){
         return mapFrag;
+    }
+
+    public ProfileFrag getProfileFrag() {
+        return profileFrag;
     }
 }

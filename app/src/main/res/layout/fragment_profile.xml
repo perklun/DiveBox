@@ -20,6 +20,15 @@
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/iv_profile_picture"
             android:layout_toEndOf="@+id/iv_profile_picture" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/tv_dive_count"
+            android:layout_below="@+id/tv_profile_name"
+            android:layout_toRightOf="@+id/iv_profile_picture"
+            android:layout_toEndOf="@+id/iv_profile_picture" />
     </RelativeLayout>
 
 </FrameLayout>

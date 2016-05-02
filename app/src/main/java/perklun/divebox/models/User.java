@@ -8,9 +8,11 @@ import android.os.Parcelable;
  */
 public class User implements Parcelable{
     public String username;
+    public String googleID;
 
     public User(Parcel in) {
         username = in.readString();
+        googleID = in.readString();
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
@@ -25,8 +27,13 @@ public class User implements Parcelable{
         }
     };
 
-    public User(String newUsername) {
-        username = newUsername;
+    public User(String name, String id) {
+        username = name;
+        googleID = id;
+    }
+
+    public User(String id){
+        googleID = id;
     }
 
     @Override
@@ -37,5 +44,6 @@ public class User implements Parcelable{
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(username);
+        dest.writeString(googleID);
     }
 }

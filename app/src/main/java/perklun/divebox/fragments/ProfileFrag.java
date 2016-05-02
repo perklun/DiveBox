@@ -10,14 +10,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.SupportMapFragment;
 import com.squareup.picasso.Picasso;
 
 import perklun.divebox.R;
+import perklun.divebox.db.DiveBoxDatabaseHelper;
+import perklun.divebox.utils.Constants;
 
 public class ProfileFrag extends Fragment {
     // newInstance constructor for creating fragment with arguments
     private SharedPreferences mSettings;
+    DiveBoxDatabaseHelper dbHelper;
+    String googleID;
+    int diveCount;
+    TextView tvProfileDiveCount;
 
     public static ProfileFrag newInstance() {
         ProfileFrag fragmentFirst = new ProfileFrag();
@@ -28,6 +33,7 @@ public class ProfileFrag extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mSettings = getActivity().getSharedPreferences(getString(R.string.SHARED_PREFERENCE_FILE_KEY),0);
+        dbHelper = DiveBoxDatabaseHelper.getDbInstance(getActivity().getApplicationContext());
     }
 
     @Override
@@ -44,6 +50,34 @@ public class ProfileFrag extends Fragment {
         if(profileName.length() > 0){
             tvProfileName.setText(profileName);
         }
+        googleID = mSettings.getString(getString(R.string.SHARED_PREF_GOOGLE_ID_KEY),null);
+        if(googleID != null){
+            tvProfileDiveCount = (TextView) view.findViewById(R.id.tv_dive_count);
+            diveCount = (int)dbHelper.getDiveCount(googleID);
+            if(diveCount != Constants.DB_OPS_ERROR){
+                tvProfileDiveCount.setText(getString(R.string.NUMBER_OF_DIVES) + String.valueOf(diveCount));
+            }
+        }
         return view;
+    }
+
+    public void increaseDiveCount(){
+        if(diveCount >= 0){
+            diveCount++;
+        }
+        else{
+            diveCount = 1;
+        }
+        tvProfileDiveCount.setText(getString(R.string.NUMBER_OF_DIVES) + String.valueOf(diveCount));
+    }
+
+    public void decreaseDiveCount(){
+        if(diveCount > 0){
+            diveCount--;
+        }
+        else{
+            diveCount = 0;
+        }
+        tvProfileDiveCount.setText(getString(R.string.NUMBER_OF_DIVES) + String.valueOf(diveCount));
     }
 }

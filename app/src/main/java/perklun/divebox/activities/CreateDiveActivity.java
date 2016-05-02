@@ -100,7 +100,8 @@ public class CreateDiveActivity extends AppCompatActivity implements GoogleMap.O
             @Override
             public void onClick(View v) {
                 String username = mSettings.getString(getString(R.string.SHARED_PREF_USERNAME_KEY),"");
-                Dive dive = new Dive(new User(username), diveTitleEditText.getText().toString(), position);
+                String googleID = mSettings.getString(getString(R.string.SHARED_PREF_GOOGLE_ID_KEY),"");
+                Dive dive = new Dive(new User(username, googleID), diveTitleEditText.getText().toString(), position);
                 dbHelper = DiveBoxDatabaseHelper.getDbInstance(getApplicationContext());
                 int resultCode = dbHelper.addDive(dive);
                 Intent i = new Intent();

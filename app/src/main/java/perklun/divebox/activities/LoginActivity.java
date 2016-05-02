@@ -139,7 +139,7 @@ public class LoginActivity extends AppCompatActivity implements
                 mSettingEditior.putString(getString(R.string.SHARED_PREF_PHOTO_URL_KEY), acct.getPhotoUrl().toString());
                 //Log.d("PHOTO:", acct.getPhotoUrl().toString());
             }
-            mSettingEditior.putString(getString(R.string.SHARED_PREF_ID_KEY), acct.getId());
+            mSettingEditior.putString(getString(R.string.SHARED_PREF_GOOGLE_ID_KEY), acct.getId());
             //Log.d("ID:", acct.getId());
             mSettingEditior.commit();
             Intent i = new Intent(this, MainActivity.class);

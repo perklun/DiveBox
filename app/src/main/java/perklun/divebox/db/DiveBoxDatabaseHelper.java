@@ -3,6 +3,7 @@ package perklun.divebox.db;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -42,6 +43,7 @@ public class DiveBoxDatabaseHelper extends SQLiteOpenHelper{
     // Users Table Columns
     private static final String KEY_USER_ID = "id";
     private static final String KEY_USER_NAME = "username";
+    private static final String KEY_USER_GOOGLEID = "googleid";
 
     // Private constructor
     private DiveBoxDatabaseHelper(Context context) {
@@ -76,7 +78,8 @@ public class DiveBoxDatabaseHelper extends SQLiteOpenHelper{
         String CREATE_USERS_TABLE = "CREATE TABLE " + TABLE_USERS +
                 "(" +
                 KEY_USER_ID + " INTEGER PRIMARY KEY," +
-                KEY_USER_NAME + " TEXT" +
+                KEY_USER_NAME + " TEXT, " +
+                KEY_USER_GOOGLEID + " TEXT" +
                 ")";
         db.execSQL(CREATE_DIVES_TABLE);
         db.execSQL(CREATE_USERS_TABLE);
@@ -119,18 +122,19 @@ public class DiveBoxDatabaseHelper extends SQLiteOpenHelper{
         return result;
     }
 
-    private long addOrUpdateUser(User user) {
+    public long addOrUpdateUser(User user) {
         SQLiteDatabase db = getWritableDatabase();
         long userId = -1;
         db.beginTransaction();
         try{
             ContentValues values = new ContentValues();
+            values.put(KEY_USER_GOOGLEID, user.googleID);
             values.put(KEY_USER_NAME, user.username);
-            int rows = db.update(TABLE_USERS, values, KEY_USER_NAME + "= ?", new String[]{user.username});
+            int rows = db.update(TABLE_USERS, values, KEY_USER_GOOGLEID + "= ?", new String[]{user.googleID});
             if(rows == 1){
                 // Get primary key
-                String usersSelectQuery = String.format("SELECT %s FROM %s WHERE %s = ?", KEY_USER_ID, TABLE_USERS, KEY_USER_NAME);
-                Cursor cursor = db.rawQuery(usersSelectQuery, new String[]{String.valueOf((user.username))});
+                String usersSelectQuery = String.format("SELECT %s FROM %s WHERE %s = ?", KEY_USER_ID, TABLE_USERS, KEY_USER_GOOGLEID);
+                Cursor cursor = db.rawQuery(usersSelectQuery, new String[]{String.valueOf(user.googleID)});
                 try{
                     if(cursor.moveToFirst()){
                         userId = cursor.getInt(0);
@@ -157,38 +161,37 @@ public class DiveBoxDatabaseHelper extends SQLiteOpenHelper{
         return  userId;
     }
 
-    public List<Dive> getAllDives(){
+    public List<Dive> getAllDives(String googleId){
         List<Dive> dives = new ArrayList<>();
-        /*String DIVES_SELECT_QUERY = String.format("SELECT * FROM %s LEFT OUTER JOIN %s ON %s.%s = %s.%s",
-                TABLE_DIVES,
-                TABLE_USERS,
-                TABLE_DIVES, KEY_DIVE_USER_ID,
-                TABLE_USERS, KEY_USER_ID);
-        */
-        String DIVES_SELECT_QUERY = String.format("SELECT * FROM %s",
-                TABLE_DIVES);
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery(DIVES_SELECT_QUERY, null);
-        try{
-           if(cursor.moveToFirst()){
-               do{
-                   //TODO: This looks to be getting all users and their dives
-                   User newUser = new User(cursor.getString(cursor.getColumnIndex(KEY_DIVE_USER_ID)));
-                   LatLng position = new LatLng(cursor.getDouble(cursor.getColumnIndex(KEY_DIVE_LAT)),cursor.getDouble(cursor.getColumnIndex(KEY_DIVE_LONG)));
-                   Dive newDive = new Dive(newUser, cursor.getString(cursor.getColumnIndex(KEY_DIVE_TITLE)), position);
-                   newDive.setId(cursor.getInt(cursor.getColumnIndex(KEY_DIVE_ID)));
-                   dives.add(newDive);
-               }
-               while(cursor.moveToNext());
-           }
-        }
-        catch (Exception e){
-            Log.d(TAG, "Error retrieving dives");
-        }
-        finally {
-            if(cursor != null && !cursor.isClosed()){
-                cursor.close();
+        int userId = getUserId(googleId);
+        if(userId >= 0){
+            String DIVES_SELECT_QUERY = String.format("SELECT * FROM %s WHERE %s = ?",
+                    TABLE_DIVES, KEY_DIVE_USER_ID);
+            SQLiteDatabase db = getReadableDatabase();
+            Cursor cursor = db.rawQuery(DIVES_SELECT_QUERY, new String[]{String.valueOf(userId)});
+            try{
+                if(cursor.moveToFirst()){
+                    do{
+                        User newUser = new User(googleId);
+                        LatLng position = new LatLng(cursor.getDouble(cursor.getColumnIndex(KEY_DIVE_LAT)),cursor.getDouble(cursor.getColumnIndex(KEY_DIVE_LONG)));
+                        Dive newDive = new Dive(newUser, cursor.getString(cursor.getColumnIndex(KEY_DIVE_TITLE)), position);
+                        newDive.setId(cursor.getInt(cursor.getColumnIndex(KEY_DIVE_ID)));
+                        dives.add(newDive);
+                    }
+                    while(cursor.moveToNext());
+                }
             }
+            catch (Exception e){
+                Log.d(TAG, "Error retrieving dives");
+            }
+            finally {
+                if(cursor != null && !cursor.isClosed()){
+                    cursor.close();
+                }
+            }
+        }
+        else{
+            Log.d(TAG, "Error retrieving user");
         }
         return dives;
     }
@@ -211,5 +214,37 @@ public class DiveBoxDatabaseHelper extends SQLiteOpenHelper{
             db.endTransaction();
         }
         return result;
+    }
+
+    public int getUserId(String googleId){
+        SQLiteDatabase db = getReadableDatabase();
+        int userId = -1;
+        String usersSelectQuery = String.format("SELECT %s FROM %s WHERE %s = ?", KEY_USER_ID, TABLE_USERS, KEY_USER_GOOGLEID);
+        Cursor cursor = db.rawQuery(usersSelectQuery, new String[]{googleId});
+        if(cursor.getCount() == 1){
+            try{
+                if(cursor.moveToFirst()){
+                    userId = cursor.getInt(0);
+                }
+            }
+            finally {
+                if(cursor != null && !cursor.isClosed()){
+                    cursor.close();
+                }
+            }
+        }
+        if(userId >= 0){
+            return userId;
+        }
+        return Constants.DB_OPS_ERROR;
+    }
+
+    public long getDiveCount(String googleId){
+        long userId = getUserId(googleId);
+        SQLiteDatabase db = getReadableDatabase();
+        if(userId > 0){
+            return DatabaseUtils.queryNumEntries(db, TABLE_DIVES, KEY_DIVE_USER_ID + "=" + userId);
+        }
+        return Constants.DB_OPS_ERROR;
     }
 }

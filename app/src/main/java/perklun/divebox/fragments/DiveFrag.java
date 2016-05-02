@@ -1,6 +1,7 @@
 package perklun.divebox.fragments;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,6 +26,7 @@ public class DiveFrag extends Fragment {
     DiveRecyclerViewAdapter diveRecyclerViewAdapter;
     DiveBoxDatabaseHelper dbHelper;
     List<Dive> divesList;
+    private SharedPreferences mSettings;
 
     public static DiveFrag newInstance() {
         DiveFrag fragmentFirst = new DiveFrag();
@@ -34,9 +36,12 @@ public class DiveFrag extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mSettings = getActivity().getSharedPreferences(getString(R.string.SHARED_PREFERENCE_FILE_KEY),0);
+        String googleID = mSettings.getString(getString(R.string.SHARED_PREF_GOOGLE_ID_KEY),"");
         dbHelper = DiveBoxDatabaseHelper.getDbInstance(this.getContext());
-        divesList = dbHelper.getAllDives();
+        divesList = dbHelper.getAllDives(googleID);
         diveRecyclerViewAdapter = new DiveRecyclerViewAdapter(divesList);
+
     }
 
     @Override

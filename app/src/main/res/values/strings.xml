@@ -17,6 +17,7 @@
     <string name="SHARED_PREF_PHOTO_URL_KEY">photo</string>
     <string name="SHARED_PREF_EMAIL_KEY">email</string>
     <string name="SHARED_PREF_ID_KEY">id</string>
+    <string name="SHARED_PREF_GOOGLE_ID_KEY">googleid</string>
 
     <!-- Messages -->
     <string name="MESSAGE_DIVE_CREATE">Dive Created!</string>
@@ -29,4 +30,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Labels -->
+    <string name="NUMBER_OF_DIVES"># Dives: </string>
+
 </resources>

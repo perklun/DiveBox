@@ -1,6 +1,7 @@
 package perklun.divebox.fragments;
 
 import android.Manifest;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -40,6 +41,7 @@ public class MapFrag extends Fragment {
     List<Dive> divesList;
     HashMap<Integer, Marker> mapMarkers;
     private LatLng position;
+    private SharedPreferences mSettings;
 
     // newInstance constructor for creating fragment with arguments
     public static MapFrag newInstance() {
@@ -50,8 +52,10 @@ public class MapFrag extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mSettings = getActivity().getSharedPreferences(getString(R.string.SHARED_PREFERENCE_FILE_KEY),0);
+        String googleID = mSettings.getString(getString(R.string.SHARED_PREF_GOOGLE_ID_KEY),"");
         dbHelper = DiveBoxDatabaseHelper.getDbInstance(this.getContext());
-        divesList = dbHelper.getAllDives();
+        divesList = dbHelper.getAllDives(googleID);
         diveRecyclerViewAdapter = new DiveRecyclerViewAdapter(divesList);
         mapMarkers = new HashMap<>();
     }
