@@ -78,4 +78,8 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
     public DiveFrag getDiveFrag(){
         return diveFrag;
     }
+
+    public MapFrag getMapFrag(){
+        return mapFrag;
+    }
 }

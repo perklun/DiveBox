@@ -98,12 +98,12 @@ public class DiveBoxDatabaseHelper extends SQLiteOpenHelper{
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction(); //for consistency
         try{
-            long userId = addOrUpdateUser(dive.user);
+            long userId = addOrUpdateUser(dive.getUser());
             ContentValues values = new ContentValues();
             values.put(KEY_DIVE_USER_ID, userId);
-            values.put(KEY_DIVE_TITLE, dive.title);
-            values.put(KEY_DIVE_LAT, dive.lat);
-            values.put(KEY_DIVE_LONG, dive.lng);
+            values.put(KEY_DIVE_TITLE, dive.getTitle());
+            values.put(KEY_DIVE_LAT, dive.getLatLng().latitude);
+            values.put(KEY_DIVE_LONG, dive.getLatLng().longitude);
             //primary key autoincremented
             long diveId = db.insertOrThrow(TABLE_DIVES, null, values);
             Log.d(TAG, "Added dive key" + diveId);
@@ -176,6 +176,7 @@ public class DiveBoxDatabaseHelper extends SQLiteOpenHelper{
                    User newUser = new User(cursor.getString(cursor.getColumnIndex(KEY_DIVE_USER_ID)));
                    LatLng position = new LatLng(cursor.getDouble(cursor.getColumnIndex(KEY_DIVE_LAT)),cursor.getDouble(cursor.getColumnIndex(KEY_DIVE_LONG)));
                    Dive newDive = new Dive(newUser, cursor.getString(cursor.getColumnIndex(KEY_DIVE_TITLE)), position);
+                   newDive.setId(cursor.getInt(cursor.getColumnIndex(KEY_DIVE_ID)));
                    dives.add(newDive);
                }
                while(cursor.moveToNext());
@@ -192,7 +193,23 @@ public class DiveBoxDatabaseHelper extends SQLiteOpenHelper{
         return dives;
     }
 
-    public void deleteDive(){
-
+    public int deleteDive(Dive dive){
+        int result = Constants.DB_OPS_ERROR;
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction(); //for consistency
+        try{
+            //primary key autoincremented
+            db.delete(TABLE_DIVES, KEY_DIVE_ID + '=' + dive.getId(), null);
+            Log.d(TAG, "Deleted dive key" + dive.getId());
+            db.setTransactionSuccessful();
+            result = Constants.DB_OPS_SUCCESS;
+        }
+        catch (Exception e){
+            Log.d(TAG, "Error trying to delete dive data");
+        }
+        finally {
+            db.endTransaction();
+        }
+        return result;
     }
 }

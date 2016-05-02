@@ -10,17 +10,19 @@ import perklun.divebox.utils.Constants;
 /**
  * Created by perklun on 4/23/2016.
  */
-public class Dive implements Parcelable{
-    public User user;
-    public String title;
-    public double lat;
-    public double lng;
+public class Dive implements Parcelable {
+    User user;
+    String title;
+    double lat;
+    double lng;
+    int id;
 
     public Dive(Parcel in) {
         user = in.readParcelable(User.class.getClassLoader());
         title = in.readString();
         lat = in.readDouble();
         lng = in.readDouble();
+        id = in.readInt();
     }
 
     public static final Creator<Dive> CREATOR = new Creator<Dive>() {
@@ -53,16 +55,33 @@ public class Dive implements Parcelable{
         dest.writeString(title);
         dest.writeDouble(lat);
         dest.writeDouble(lng);
+        dest.writeInt(id);
     }
 
-    public LatLng getLatLng(){
+    public LatLng getLatLng() {
         return new LatLng(lat, lng);
     }
 
-    public boolean hasLatLng(){
-        if(lat == Constants.INVALID_LAT || lng == Constants.INVALID_LONG){
+    public boolean hasLatLng() {
+        if (lat == Constants.INVALID_LAT || lng == Constants.INVALID_LONG) {
             return false;
         }
         return true;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setId(int id){
+        this.id = id;
+    }
+
+    public int getId(){
+        return id;
+    }
+
+    public User getUser() {
+        return user;
     }
 }

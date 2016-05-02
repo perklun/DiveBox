@@ -9,6 +9,7 @@
 
     <!-- Buttons -->
     <string name="create_dive_submit">Create Dive</string>
+    <string name="delete_dive_submit">Delete Dive</string>
 
     <!-- SharedPref file -->
     <string name="SHARED_PREFERENCE_FILE_KEY">divebox</string>
@@ -19,6 +20,7 @@
 
     <!-- Messages -->
     <string name="MESSAGE_DIVE_CREATE">Dive Created!</string>
+    <string name="MESSAGE_DIVE_DELETED">Dive Deleted!</string>
 
     <!-- Error Messages -->
     <string name="MAP_UNAVAILABLE">Map Unavailable!</string>

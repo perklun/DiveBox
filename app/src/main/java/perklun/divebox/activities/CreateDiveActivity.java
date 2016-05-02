@@ -116,6 +116,7 @@ public class CreateDiveActivity extends AppCompatActivity implements GoogleMap.O
     public void onMapLongClick(LatLng latLng) {
         // Create the marker on the fragment
         position = latLng;
+        mapMarker.remove();
         mapMarker = googleMap.addMarker(new MarkerOptions()
                 .position(latLng)
                 .icon(defaultMarker));
@@ -127,11 +128,9 @@ public class CreateDiveActivity extends AppCompatActivity implements GoogleMap.O
         final android.os.Handler handler = new android.os.Handler();
         final long start = SystemClock.uptimeMillis();
         final long duration = 1500;
-
         // Use the bounce interpolator
         final android.view.animation.Interpolator interpolator =
                 new BounceInterpolator();
-
         // Animate marker with a bounce updating its position every 15ms
         handler.post(new Runnable() {
             @Override
@@ -143,7 +142,6 @@ public class CreateDiveActivity extends AppCompatActivity implements GoogleMap.O
                                 / duration), 0);
                 // Set the anchor
                 marker.setAnchor(0.5f, 1.0f + 14 * t);
-
                 if (t > 0.0) {
                     // Post this event again 15ms from now.
                     handler.postDelayed(this, 15);

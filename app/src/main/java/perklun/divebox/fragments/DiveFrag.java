@@ -21,7 +21,6 @@ import perklun.divebox.utils.ItemClickSupport;
 
 public class DiveFrag extends Fragment {
     // newInstance constructor for creating fragment with arguments
-
     RecyclerView diveRecyclerView;
     DiveRecyclerViewAdapter diveRecyclerViewAdapter;
     DiveBoxDatabaseHelper dbHelper;
@@ -54,7 +53,7 @@ public class DiveFrag extends Fragment {
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         Intent i = new Intent(getActivity(), ViewDiveActivity.class);
                         i.putExtra(Constants.DIVE, divesList.get(position));
-                        startActivity(i);
+                        getActivity().startActivityForResult(i, Constants.REQUEST_CODE_VIEW_DIVE);
                     }
                 }
         );
@@ -64,5 +63,19 @@ public class DiveFrag extends Fragment {
     public void addDiveUpdateRecyclerViewAdapter(Dive dive){
         divesList.add(dive);
         diveRecyclerViewAdapter.notifyItemInserted(divesList.size()-1);
+    }
+
+    public void deleteDiveUpdateRecyclerViewAdapter(Dive dive){
+        int divePos = 0;
+        //TODO: Hackyway to keep find index as id != to index in list
+        for(divePos = 0; divePos < divesList.size(); divePos++){
+            if(divesList.get(divePos).getId() == dive.getId()){
+                break;
+            }
+        }
+        if(divePos >= 0){
+            divesList.remove(divePos);
+            diveRecyclerViewAdapter.notifyItemRemoved(divePos);
+        }
     }
 }

@@ -36,7 +36,7 @@ public class DiveRecyclerViewAdapter extends RecyclerView.Adapter<DiveRecyclerVi
     public void onBindViewHolder(ViewHolder holder, int position) {
         Dive dive = mDives.get(position);
         TextView tvDiveTitle = holder.diveTitle;
-        tvDiveTitle.setText(dive.title);
+        tvDiveTitle.setText(dive.getTitle());
     }
 
     @Override
