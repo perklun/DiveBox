@@ -4,8 +4,8 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin_phone">16dp</dimen>
     <dimen name="fab_margin_tablet">24dp</dimen>
-    <dimen name="create_dive_map_dimensions">240dp</dimen>
-    <dimen name="view_dive_map_dimensions">240dp</dimen>
+    <dimen name="create_dive_map_height">160dp</dimen>
+    <dimen name="view_dive_map_dimensions">160dp</dimen>
     <dimen name="ibtn_selelct_dive_cert_height">16dp</dimen>
     <dimen name="ibtn_selelct_dive_cert_width">16dp</dimen>
 

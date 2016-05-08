@@ -1,5 +1,6 @@
 package perklun.divebox.fragments;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -63,9 +65,9 @@ public class ProfileFrag extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        final View view = inflater.inflate(R.layout.fragment_profile, container, false);
         ImageView ivProfilePic = (ImageView) view.findViewById(R.id.iv_profile_picture);
         String uri = mSettings.getString(getString(R.string.SHARED_PREF_PHOTO_URL_KEY),"");
         if(uri.length() > 0){
@@ -103,34 +105,7 @@ public class ProfileFrag extends Fragment {
         ibSelectDiveCert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder b = createAlertDialog(getContext(), getContext().getResources().getString(R.string.DIVE_CERT));
-                final String[] types = getContext().getResources().getStringArray(R.array.DIVE_CERTIFICATIIONS);
-                b.setItems(types, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        tvDiveCert.setText(types[which]);
-                        prefDiveCert = types[which];
-                        setPrefString(getString(R.string.SHARED_PREF_DIVE_CERT), prefDiveCert);
-                        AlertDialog.Builder b = createAlertDialog(getContext(), getContext().getResources().getString(R.string.DIVE_LEVELS));
-                        String[] levels = getContext().getResources().getStringArray(R.array.PADI_DIVE_LEVELS);
-                        if(which == 1){
-                            levels = getContext().getResources().getStringArray(R.array.SSI_DIVE_LEVELS);
-                        }
-                        final String[] types = levels;
-                        b.setItems(types, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                tvDiveLevel.setText(types[which]);
-                                prefDiveLevel = types[which];
-                                setPrefString(getString(R.string.SHARED_PREF_DIVE_LEVEL), prefDiveLevel);
-                            }
-                        });
-                        b.show();
-                    }
-                });
-                b.show();
+                showCertificationDialog();
             }
         });
         prefDWeight = mSettings.getString(getString(R.string.SHARED_PREF_WEIGHT),"Please select one");
@@ -141,33 +116,89 @@ public class ProfileFrag extends Fragment {
         ibSelectWeight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder b = createAlertDialog(getContext(), getContext().getResources().getString(R.string.WEIGHT));
-                final String[] types = weights;
+                showWeightDialog();
+            }
+        });
+        return view;
+    }
+
+    public void showWeightDialog() {
+        final Dialog dialog = new Dialog(getContext());
+        dialog.setTitle(getContext().getResources().getString(R.string.WEIGHT));
+        dialog.setContentView(R.layout.number_picker);
+        Button btnSelectKG = (Button) dialog.findViewById(R.id.btn_select_kg);
+        Button btnSelectLBS = (Button) dialog.findViewById(R.id.btn_select_lbs);
+        final NumberPicker np = (NumberPicker) dialog.findViewById(R.id.np_weight_value);
+        np.setMaxValue(20); // max value 20
+        np.setMinValue(0);   // min value 0
+        np.setValue(Integer.valueOf(prefDWeight));
+        np.setWrapSelectorWheel(false);
+        np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                //Do nothing
+            }
+        });
+        btnSelectKG.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setWeightMetrics(true, np.getValue());
+                tvWeight.setText(prefDWeight + " " + prefDWeightMetric);
+                dialog.dismiss();
+            }
+        });
+        btnSelectLBS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setWeightMetrics(false, np.getValue());
+                dialog.dismiss(); // dismiss the dialog
+            }
+        });
+        dialog.show();
+    }
+
+    public void setWeightMetrics(boolean kg, int weight_value){
+        if(kg){
+            prefDWeightMetric = getContext().getResources().getString(R.string.KG);
+        }
+        else{
+            prefDWeightMetric = getContext().getResources().getString(R.string.LBS);
+        }
+        prefDWeight = String.valueOf(weight_value);
+        tvWeight.setText(prefDWeight + " " + prefDWeightMetric);
+        setPrefString(getString(R.string.SHARED_PREF_WEIGHT_METRIC), prefDWeightMetric);
+        setPrefString(getString(R.string.SHARED_PREF_WEIGHT), prefDWeight);
+    }
+
+    public void showCertificationDialog(){
+        AlertDialog.Builder b = createAlertDialog(getContext(), getContext().getResources().getString(R.string.DIVE_CERT));
+        final String[] types = getContext().getResources().getStringArray(R.array.DIVE_CERTIFICATIIONS);
+        b.setItems(types, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int position) {
+                dialog.dismiss();
+                tvDiveCert.setText(types[position]);
+                prefDiveCert = types[position];
+                setPrefString(getString(R.string.SHARED_PREF_DIVE_CERT), prefDiveCert);
+                AlertDialog.Builder b = createAlertDialog(getContext(), getContext().getResources().getString(R.string.DIVE_LEVELS));
+                String[] levels = getContext().getResources().getStringArray(R.array.PADI_DIVE_LEVELS);
+                if(position == 1){ //SSI is second one
+                    levels = getContext().getResources().getStringArray(R.array.SSI_DIVE_LEVELS);
+                }
+                final String[] types = levels;
                 b.setItems(types, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        prefDWeight = types[which];
-                        setPrefString(getString(R.string.SHARED_PREF_WEIGHT), prefDWeight);
-                        AlertDialog.Builder b = createAlertDialog(getContext(), getContext().getResources().getString(R.string.WEIGHT_METRIC));
-                        final String[] types = getContext().getResources().getStringArray(R.array.WEIGHT_METRIC_CHOICES);
-                        b.setItems(types, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                prefDWeightMetric = types[which];
-                                setPrefString(getString(R.string.SHARED_PREF_WEIGHT_METRIC), prefDWeightMetric);
-                                tvWeight.setText(prefDWeight + " " + prefDWeightMetric);
-                            }
-                        });
-                        b.show();
+                        tvDiveLevel.setText(types[which]);
+                        prefDiveLevel = types[which];
+                        setPrefString(getString(R.string.SHARED_PREF_DIVE_LEVEL), prefDiveLevel);
                     }
                 });
                 b.show();
             }
         });
-
-        return view;
+        b.show();
     }
 
     public AlertDialog.Builder createAlertDialog(Context c, String title){

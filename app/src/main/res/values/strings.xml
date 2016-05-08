@@ -71,10 +71,14 @@
         <item>kg</item>
     </string-array>
 
-    <!-- Dialog titles -->
+    <!-- Dive Dialog -->
     <string name="DIVE_CERT">Dive Certification:</string>
     <string name="DIVE_LEVELS">Dive Levels:</string>
+
+    <!-- Weight Dialog -->
     <string name="WEIGHT">Weight Preference:</string>
     <string name="WEIGHT_METRIC">Metric:</string>
+    <string name="KG">kg</string>
+    <string name="LBS">lbs</string>
 
 </resources>

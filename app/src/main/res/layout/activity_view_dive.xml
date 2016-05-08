@@ -18,7 +18,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/view_mapview"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/create_dive_map_dimensions"
+        android:layout_height="@dimen/view_dive_map_dimensions"
         android:layout_below="@+id/tv_dive_detail_title"
         android:layout_toRightOf="@+id/tv_dive_detail_title"
         android:layout_toEndOf="@+id/tv_dive_detail_title" />

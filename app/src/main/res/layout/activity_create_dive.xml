@@ -29,20 +29,115 @@
 
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btn_create_dive_submit"
         android:text="@string/create_dive_submit"
-        android:layout_below="@+id/tv_dive_title_label"
+        android:layout_below="@+id/et_comments_value"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="false" />
 
     <com.google.android.gms.maps.MapView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/create_mapview"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/create_dive_map_dimensions"
-        android:layout_below="@+id/btn_create_dive_submit"
+        android:layout_height="@dimen/create_dive_map_height"
+        android:layout_below="@+id/tv_date_label"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Entry Info:"
+        android:id="@+id/tv_entry_info_label"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time in:"
+        android:id="@+id/tv_time_in_label"
+        android:layout_below="@+id/tv_entry_info_label"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Air In:"
+        android:id="@+id/tv_air_in_label"
+        android:layout_below="@+id/tv_time_in_label"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Exit Info:"
+        android:id="@+id/tv_exit_info_label"
+        android:layout_below="@+id/tv_air_in_label"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time Out:"
+        android:id="@+id/tv_time_out_label"
+        android:layout_below="@+id/tv_exit_info_label"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Air Out:"
+        android:id="@+id/tv_air_out_label"
+        android:layout_below="@+id/tv_time_out_label"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Comments:"
+        android:id="@+id/tv_comments_label"
+        android:layout_below="@+id/tv_air_out_label"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(Describe what you saw, your experience, etc.)"
+        android:id="@+id/tv_comments_prompt"
+        android:layout_below="@+id/tv_comments_label"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/et_comments_value"
+        android:layout_below="@+id/tv_comments_prompt"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/create_mapview"
+        android:layout_alignEnd="@+id/create_mapview" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date:"
+        android:id="@+id/tv_date_label"
+        android:layout_below="@+id/et_input_title"
+        android:layout_alignRight="@+id/tv_air_in_label"
+        android:layout_alignEnd="@+id/tv_air_in_label" />
+
 </RelativeLayout>
