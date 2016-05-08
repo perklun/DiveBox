@@ -6,5 +6,7 @@
     <dimen name="fab_margin_tablet">24dp</dimen>
     <dimen name="create_dive_map_dimensions">240dp</dimen>
     <dimen name="view_dive_map_dimensions">240dp</dimen>
+    <dimen name="ibtn_selelct_dive_cert_height">16dp</dimen>
+    <dimen name="ibtn_selelct_dive_cert_width">16dp</dimen>
 
 </resources>

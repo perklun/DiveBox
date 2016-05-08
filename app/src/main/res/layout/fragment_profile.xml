@@ -29,6 +29,90 @@
             android:layout_below="@+id/tv_profile_name"
             android:layout_toRightOf="@+id/iv_profile_picture"
             android:layout_toEndOf="@+id/iv_profile_picture" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dive Certification:"
+            android:id="@+id/tv_dive_cert_label"
+            android:layout_gravity="left|center_vertical"
+            android:layout_below="@+id/iv_profile_picture"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dive Level:"
+            android:id="@+id/tv_dive_level_label"
+            android:layout_gravity="left|bottom"
+            android:layout_below="@+id/tv_dive_cert_label"
+            android:layout_alignLeft="@+id/tv_dive_cert_label"
+            android:layout_alignStart="@+id/tv_dive_cert_label" />
+
+        <ImageButton
+            android:layout_width="@dimen/ibtn_selelct_dive_cert_width"
+            android:layout_height="@dimen/ibtn_selelct_dive_cert_height"
+            android:id="@+id/ibtn_selelct_dive_cert"
+            android:layout_alignBottom="@+id/tv_dive_cert"
+            android:layout_toRightOf="@+id/tv_dive_cert"
+            android:layout_toEndOf="@+id/tv_dive_cert"
+            android:src="@mipmap/ic_launcher"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/tv_dive_cert"
+            android:layout_above="@+id/tv_dive_level_label"
+            android:layout_toRightOf="@+id/tv_dive_cert_label"
+            android:layout_toEndOf="@+id/tv_dive_cert_label" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/tv_dive_level"
+            android:layout_below="@+id/tv_dive_cert_label"
+            android:layout_toRightOf="@+id/tv_dive_level_label"
+            android:layout_toEndOf="@+id/tv_dive_level_label" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:id="@+id/btn_profile_logout"
+            android:layout_below="@+id/tv_weight_label"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weights:"
+            android:id="@+id/tv_weight_label"
+            android:layout_below="@+id/tv_dive_level_label"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/tv_weight_amount"
+            android:layout_below="@+id/tv_dive_level_label"
+            android:layout_toRightOf="@+id/tv_dive_count"
+            android:layout_toEndOf="@+id/tv_dive_count" />
+
+        <ImageButton
+            android:layout_width="@dimen/ibtn_selelct_dive_cert_width"
+            android:layout_height="@dimen/ibtn_selelct_dive_cert_height"
+            android:id="@+id/ibtn_select_weight"
+            android:src="@mipmap/ic_launcher"
+            android:layout_below="@+id/tv_dive_level"
+            android:layout_toRightOf="@+id/tv_dive_cert_label"
+            android:layout_toEndOf="@+id/tv_dive_cert_label" />
+
     </RelativeLayout>
 
 </FrameLayout>

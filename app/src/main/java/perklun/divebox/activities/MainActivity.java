@@ -63,9 +63,10 @@ public class MainActivity extends AppCompatActivity {
         DiveFrag diveFrag = adapterMainPager.getDiveFrag();
         MapFrag mapFrag = adapterMainPager.getMapFrag();
         ProfileFrag profFrag = adapterMainPager.getProfileFrag();
-        Dive newDive = data.getParcelableExtra(Constants.DIVE);
+
         if(requestCode == Constants.REQUEST_CODE_CREATE_DIVE && resultCode == Constants.DB_OPS_SUCCESS) {
             Toast.makeText(this, getString(R.string.MESSAGE_DIVE_CREATE), Toast.LENGTH_SHORT).show();
+            Dive newDive = data.getParcelableExtra(Constants.DIVE);
             //update diveFrag
             diveFrag.addDiveUpdateRecyclerViewAdapter(newDive);
             //update mapFrag
@@ -78,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else if(requestCode == Constants.REQUEST_CODE_VIEW_DIVE && resultCode == Constants.DB_OPS_SUCCESS){
             Toast.makeText(this, getString(R.string.MESSAGE_DIVE_DELETED), Toast.LENGTH_SHORT).show();
+            Dive newDive = data.getParcelableExtra(Constants.DIVE);
             //update diveFrag
             diveFrag.deleteDiveUpdateRecyclerViewAdapter(newDive);
             //update mapFrag

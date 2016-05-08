@@ -41,7 +41,6 @@ public class DiveFrag extends Fragment {
         dbHelper = DiveBoxDatabaseHelper.getDbInstance(this.getContext());
         divesList = dbHelper.getAllDives(googleID);
         diveRecyclerViewAdapter = new DiveRecyclerViewAdapter(divesList);
-
     }
 
     @Override

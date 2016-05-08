@@ -19,8 +19,10 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 
 import perklun.divebox.R;
+import perklun.divebox.utils.Constants;
 
 public class LoginActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
@@ -34,6 +36,7 @@ public class LoginActivity extends AppCompatActivity implements
 
     private SharedPreferences mSettings;
     private SharedPreferences.Editor mSettingEditior;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,7 @@ public class LoginActivity extends AppCompatActivity implements
         // Shared Preferences
         mSettings = getSharedPreferences(getString(R.string.SHARED_PREFERENCE_FILE_KEY), Context.MODE_PRIVATE);
         mSettingEditior = mSettings.edit();
+        int logout = getIntent().getIntExtra(Constants.LOGOUT, 0);
     }
 
     //Obtain previous login
@@ -130,6 +134,7 @@ public class LoginActivity extends AppCompatActivity implements
     // Handle sign result
     private void handleSignInResult(GoogleSignInResult result) {
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
+
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
@@ -147,23 +152,38 @@ public class LoginActivity extends AppCompatActivity implements
             startActivity(i);
         } else {
             //TODO: what happens when the result isn't success, maybe put a toast?
+            Log.d("LoginActiviy", "Error signing in");
             // Signed out, show unauthenticated UI.
             //updateUI(false);
         }
+
+
     }
 
-    private void showProgressDialog() {
-        if (mProgressDialog == null) {
-            mProgressDialog = new ProgressDialog(this);
-            mProgressDialog.setMessage(getString(R.string.loading));
-            mProgressDialog.setIndeterminate(true);
+
+    private void signOut() {
+        if(mGoogleApiClient.isConnected()) {
+            Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
+                    new ResultCallback<Status>() {
+                        @Override
+                        public void onResult(Status status) {
+                            Log.d("LoginActiviy", "User signed out");
+                        }
+                    });
         }
-        mProgressDialog.show();
     }
 
-    private void hideProgressDialog() {
-        if (mProgressDialog != null && mProgressDialog.isShowing()) {
-            mProgressDialog.hide();
+    private void revokeAccess() {
+        if(mGoogleApiClient.isConnected()){
+            Auth.GoogleSignInApi.revokeAccess(mGoogleApiClient).setResultCallback(
+                    new ResultCallback<Status>() {
+                        @Override
+                        public void onResult(Status status) {
+                            // ...
+                        }
+                    });
         }
+
     }
+
 }

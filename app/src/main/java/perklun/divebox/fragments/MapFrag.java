@@ -145,24 +145,28 @@ public class MapFrag extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        mapFragMapView.onResume();
+        if(mapFragMapView != null)
+            mapFragMapView.onResume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mapFragMapView.onPause();
+        if(mapFragMapView != null)
+            mapFragMapView.onPause();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mapFragMapView.onDestroy();
+        if(mapFragMapView != null)
+            mapFragMapView.onDestroy();
     }
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        mapFragMapView.onLowMemory();
+        if(mapFragMapView != null)
+            mapFragMapView.onLowMemory();
     }
 }
