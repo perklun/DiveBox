@@ -75,10 +75,54 @@
     <string name="DIVE_CERT">Dive Certification:</string>
     <string name="DIVE_LEVELS">Dive Levels:</string>
 
+
+    <!-- Date Picker Dialog -->
+    <string name="SELECT_DATE">Select Date:</string>
+
     <!-- Weight Dialog -->
     <string name="WEIGHT">Weight Preference:</string>
     <string name="WEIGHT_METRIC">Metric:</string>
     <string name="KG">kg</string>
     <string name="LBS">lbs</string>
+
+    <!-- Time Picker Dialog -->
+    <string name="TIME_IN">Time In:</string>
+    <string name="TIME_OUT">Time Out:</string>
+    <string name="TIME_ERROR">Times selected is invalid!</string>
+
+    <!-- Air Picker Dialog -->
+    <string name="AIR_IN">Air In:</string>
+    <string name="AIR_OUT">Air Out:</string>
+    <string name="bar">bar</string>
+    <string name="psi">psi</string>
+
+    <!--Dive Labels -->
+    <string name="label_dive_title">Dive Title:</string>
+    <string name="label_entry_info">Entry Info:</string>
+    <string name="label_exit_info">Exit Info:</string>
+    <string name="label_air_in">Air In:</string>
+    <string name="label_air_out">Air Out:</string>
+    <string name="label_air_prompt">Choose a value</string>
+    <string name="label_time_in">Time In:</string>
+    <string name="label_time_prompt">Select a time</string>
+    <string name="label_time_out">Time Out:</string>
+    <string name="label_comment">Comment:</string>
+    <string name="label_comment_prompt">(Describe what you saw, your experience, etc.)</string>
+    <string name="label_btm_time">Bottom Time:</string>
+    <string name="label_date">Date:</string>
+    <string name="label_date_prompt">Select a date</string>
+
+    <!-- Create Dive Bundle Keys -->
+    <string name="create_dive_title_key">dive_title</string>
+    <string name="create_dive_date_key">date</string>
+    <string name="create_dive_air_in_key">air_in</string>
+    <string name="create_dive_air_out_key">air_out</string>
+    <string name="create_dive_time_in_key">time_in</string>
+    <string name="create_dive_time_out_key">time_out</string>
+    <string name="create_dive_btm_time_key">btm_time</string>
+    <string name="create_dive_comment_key">comment</string>
+
+
+
 
 </resources>

@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +62,7 @@ public class ProfileFrag extends Fragment {
         for(int i = 0; i < 20; i++){
             weights[i] = String.valueOf(i+1);
         }
-
+        //setRetainInstance(true);
     }
 
     @Override
@@ -125,13 +126,21 @@ public class ProfileFrag extends Fragment {
     public void showWeightDialog() {
         final Dialog dialog = new Dialog(getContext());
         dialog.setTitle(getContext().getResources().getString(R.string.WEIGHT));
-        dialog.setContentView(R.layout.number_picker);
+        dialog.setContentView(R.layout.number_picker_weight);
         Button btnSelectKG = (Button) dialog.findViewById(R.id.btn_select_kg);
         Button btnSelectLBS = (Button) dialog.findViewById(R.id.btn_select_lbs);
         final NumberPicker np = (NumberPicker) dialog.findViewById(R.id.np_weight_value);
         np.setMaxValue(20); // max value 20
         np.setMinValue(0);   // min value 0
-        np.setValue(Integer.valueOf(prefDWeight));
+        int initialWeight  = 5;
+        try{
+            initialWeight = Integer.valueOf(prefDWeight);
+        }
+        catch(NumberFormatException e){
+            //Do nothing if there is no initial value
+            Log.d("prefDWeight", prefDWeight);
+        }
+        np.setValue(initialWeight);
         np.setWrapSelectorWheel(false);
         np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override

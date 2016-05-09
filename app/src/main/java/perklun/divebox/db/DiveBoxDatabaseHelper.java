@@ -39,6 +39,14 @@ public class DiveBoxDatabaseHelper extends SQLiteOpenHelper{
     private static final String KEY_DIVE_TITLE = "title";
     private static final String KEY_DIVE_LAT = "lat";
     private static final String KEY_DIVE_LONG = "long";
+    private static final String KEY_DIVE_DATE = "date";
+    private static final String KEY_DIVE_COMMENT = "comment";
+    private static final String KEY_DIVE_AIR_IN = "air_in";
+    private static final String KEY_DIVE_AIR_OUT = "air_out";
+    private static final String KEY_DIVE_TIME_IN = "time_in";
+    private static final String KEY_DIVE_TIME_OUT = "time_out";
+    private static final String KEY_DIVE_BTM_TIME = "btm_time";
+
 
     // Users Table Columns
     private static final String KEY_USER_ID = "id";
@@ -72,7 +80,14 @@ public class DiveBoxDatabaseHelper extends SQLiteOpenHelper{
                 KEY_DIVE_USER_ID + " INTEGER REFERENCES " + TABLE_USERS + "," + // Define a foreign key
                 KEY_DIVE_TITLE + " TEXT," +
                 KEY_DIVE_LAT + " REAL," +
-                KEY_DIVE_LONG + " REAL" +
+                KEY_DIVE_LONG + " REAL," +
+                KEY_DIVE_DATE + " REAL," +
+                KEY_DIVE_COMMENT + " REAL," +
+                KEY_DIVE_AIR_IN + " REAL," +
+                KEY_DIVE_AIR_OUT + " REAL," +
+                KEY_DIVE_TIME_IN + " REAL," +
+                KEY_DIVE_TIME_OUT + " REAL," +
+                KEY_DIVE_BTM_TIME + " REAL" +
                 ")";
 
         String CREATE_USERS_TABLE = "CREATE TABLE " + TABLE_USERS +
@@ -107,6 +122,13 @@ public class DiveBoxDatabaseHelper extends SQLiteOpenHelper{
             values.put(KEY_DIVE_TITLE, dive.getTitle());
             values.put(KEY_DIVE_LAT, dive.getLatLng().latitude);
             values.put(KEY_DIVE_LONG, dive.getLatLng().longitude);
+            values.put(KEY_DIVE_DATE, dive.getDate());
+            values.put(KEY_DIVE_COMMENT, dive.getComments());
+            values.put(KEY_DIVE_AIR_IN, dive.getAirIn());
+            values.put(KEY_DIVE_AIR_OUT, dive.getAirOut());
+            values.put(KEY_DIVE_TIME_IN, dive.getTimeIn());
+            values.put(KEY_DIVE_TIME_OUT, dive.getTimeOut());
+            values.put(KEY_DIVE_BTM_TIME, dive.getBtmTime());
             //primary key autoincremented
             long diveId = db.insertOrThrow(TABLE_DIVES, null, values);
             Log.d(TAG, "Added dive key" + diveId);
@@ -176,6 +198,13 @@ public class DiveBoxDatabaseHelper extends SQLiteOpenHelper{
                         LatLng position = new LatLng(cursor.getDouble(cursor.getColumnIndex(KEY_DIVE_LAT)),cursor.getDouble(cursor.getColumnIndex(KEY_DIVE_LONG)));
                         Dive newDive = new Dive(newUser, cursor.getString(cursor.getColumnIndex(KEY_DIVE_TITLE)), position);
                         newDive.setId(cursor.getInt(cursor.getColumnIndex(KEY_DIVE_ID)));
+                        newDive.setDate(cursor.getString(cursor.getColumnIndex(KEY_DIVE_DATE)));
+                        newDive.setComments(cursor.getString(cursor.getColumnIndex(KEY_DIVE_COMMENT)));
+                        newDive.setAirIn(cursor.getString(cursor.getColumnIndex(KEY_DIVE_AIR_IN)));
+                        newDive.setAirOut(cursor.getString(cursor.getColumnIndex(KEY_DIVE_AIR_OUT)));
+                        newDive.setTimeIn(cursor.getString(cursor.getColumnIndex(KEY_DIVE_TIME_IN)));
+                        newDive.setTimeOut(cursor.getString(cursor.getColumnIndex(KEY_DIVE_TIME_OUT)));
+                        newDive.setBtmTime(cursor.getString(cursor.getColumnIndex(KEY_DIVE_BTM_TIME)));
                         dives.add(newDive);
                     }
                     while(cursor.moveToNext());

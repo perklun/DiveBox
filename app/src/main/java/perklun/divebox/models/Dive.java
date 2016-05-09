@@ -12,10 +12,22 @@ import perklun.divebox.utils.Constants;
  */
 public class Dive implements Parcelable {
     User user;
-    String title;
     double lat;
     double lng;
     int id;
+
+    String title;
+    String date;
+    String comments;
+    //Entry Info
+    String timeIn;
+    String airIn;
+    //Exit Info
+    String timeOut;
+    String airOut;
+    String btmTime;
+
+
 
     public Dive(Parcel in) {
         user = in.readParcelable(User.class.getClassLoader());
@@ -23,6 +35,13 @@ public class Dive implements Parcelable {
         lat = in.readDouble();
         lng = in.readDouble();
         id = in.readInt();
+        date = in.readString();
+        comments = in.readString();
+        timeIn = in.readString();
+        airIn = in.readString();
+        timeOut = in.readString();
+        airOut = in.readString();
+        btmTime = in.readString();
     }
 
     public static final Creator<Dive> CREATOR = new Creator<Dive>() {
@@ -49,6 +68,7 @@ public class Dive implements Parcelable {
         return 0;
     }
 
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeParcelable(user, flags);
@@ -56,6 +76,13 @@ public class Dive implements Parcelable {
         dest.writeDouble(lat);
         dest.writeDouble(lng);
         dest.writeInt(id);
+        dest.writeString(date);
+        dest.writeString(comments);
+        dest.writeString(timeIn);
+        dest.writeString(airIn);
+        dest.writeString(timeOut);
+        dest.writeString(airOut);
+        dest.writeString(btmTime);
     }
 
     public LatLng getLatLng() {
@@ -83,5 +110,61 @@ public class Dive implements Parcelable {
 
     public User getUser() {
         return user;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public String getTimeIn() {
+        return timeIn;
+    }
+
+    public String getAirIn() {
+        return airIn;
+    }
+
+    public String getTimeOut() {
+        return timeOut;
+    }
+
+    public String getAirOut() {
+        return airOut;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public void setTimeIn(String timeIn) {
+        this.timeIn = timeIn;
+    }
+
+    public void setAirIn(String airIn) {
+        this.airIn = airIn;
+    }
+
+    public void setTimeOut(String timeOut) {
+        this.timeOut = timeOut;
+    }
+
+    public void setAirOut(String airOut) {
+        this.airOut = airOut;
+    }
+
+    public String getBtmTime() {
+        return btmTime;
+    }
+
+    public void setBtmTime(String btmTime) {
+        this.btmTime = btmTime;
     }
 }

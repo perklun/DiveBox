@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -68,9 +69,13 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, getString(R.string.MESSAGE_DIVE_CREATE), Toast.LENGTH_SHORT).show();
             Dive newDive = data.getParcelableExtra(Constants.DIVE);
             //update diveFrag
-            diveFrag.addDiveUpdateRecyclerViewAdapter(newDive);
+            if(diveFrag != null){
+                diveFrag.addDiveUpdateRecyclerViewAdapter(newDive);
+            }
             //update mapFrag
-            mapFrag.addDiveUpdateRecyclerViewAdapter(newDive);
+            if(mapFrag != null){
+                mapFrag.addDiveUpdateRecyclerViewAdapter(newDive);
+            }
             // Fragment may not exist yet
             if(profFrag != null){
                 profFrag.increaseDiveCount();

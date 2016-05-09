@@ -13,8 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Dive title"
-        android:id="@+id/tv_dive_title_label"
+        android:text="@string/label_dive_title"
+        android:id="@+id/tv_create_dive_title_label"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -22,10 +22,14 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/et_input_title"
+        android:id="@+id/et_create_input_title"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/tv_dive_title_label"
-        android:layout_toEndOf="@+id/tv_dive_title_label" />
+        android:layout_toRightOf="@+id/tv_create_dive_title_label"
+        android:layout_toEndOf="@+id/tv_create_dive_title_label"
+        android:inputType="textCapWords"
+        android:lines="1"
+        android:singleLine="true"
+        android:ellipsize="end" />
 
 
     <Button
@@ -33,7 +37,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/btn_create_dive_submit"
         android:text="@string/create_dive_submit"
-        android:layout_below="@+id/et_comments_value"
+        android:layout_below="@+id/et_create_comments_value"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="false" />
@@ -43,15 +47,15 @@
         android:id="@+id/create_mapview"
         android:layout_width="match_parent"
         android:layout_height="@dimen/create_dive_map_height"
-        android:layout_below="@+id/tv_date_label"
+        android:layout_below="@+id/tv_create_date_label"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Entry Info:"
-        android:id="@+id/tv_entry_info_label"
+        android:text="@string/label_entry_info"
+        android:id="@+id/tv_create_entry_info_label"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -59,63 +63,63 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Time in:"
-        android:id="@+id/tv_time_in_label"
-        android:layout_below="@+id/tv_entry_info_label"
+        android:text="@string/label_time_in"
+        android:id="@+id/tv_create_time_in_label"
+        android:layout_below="@+id/tv_create_entry_info_label"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Air In:"
-        android:id="@+id/tv_air_in_label"
-        android:layout_below="@+id/tv_time_in_label"
+        android:text="@string/label_air_in"
+        android:id="@+id/tv_create_air_in_label"
+        android:layout_below="@+id/tv_create_time_in_label"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Exit Info:"
-        android:id="@+id/tv_exit_info_label"
-        android:layout_below="@+id/tv_air_in_label"
+        android:text="@string/label_exit_info"
+        android:id="@+id/tv_create_exit_info_label"
+        android:layout_below="@+id/tv_create_air_in_label"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Time Out:"
-        android:id="@+id/tv_time_out_label"
-        android:layout_below="@+id/tv_exit_info_label"
+        android:text="@string/label_time_out"
+        android:id="@+id/tv_create_time_out_label"
+        android:layout_below="@+id/tv_create_exit_info_label"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Air Out:"
-        android:id="@+id/tv_air_out_label"
-        android:layout_below="@+id/tv_time_out_label"
+        android:text="@string/label_air_out"
+        android:id="@+id/tv_create_air_out_label"
+        android:layout_below="@+id/tv_create_time_out_label"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Comments:"
-        android:id="@+id/tv_comments_label"
-        android:layout_below="@+id/tv_air_out_label"
+        android:text="@string/label_comment"
+        android:id="@+id/tv_create_comments_label"
+        android:layout_below="@+id/tv_create_air_out_label"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="(Describe what you saw, your experience, etc.)"
-        android:id="@+id/tv_comments_prompt"
-        android:layout_below="@+id/tv_comments_label"
+        android:text="@string/label_comment_prompt"
+        android:id="@+id/tv_create_comments_prompt"
+        android:layout_below="@+id/tv_create_comments_label"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -124,8 +128,8 @@
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
-        android:id="@+id/et_comments_value"
-        android:layout_below="@+id/tv_comments_prompt"
+        android:id="@+id/et_create_comments_value"
+        android:layout_below="@+id/tv_create_comments_prompt"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/create_mapview"
@@ -134,10 +138,101 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Date:"
-        android:id="@+id/tv_date_label"
-        android:layout_below="@+id/et_input_title"
-        android:layout_alignRight="@+id/tv_air_in_label"
-        android:layout_alignEnd="@+id/tv_air_in_label" />
+        android:text="@string/label_date"
+        android:id="@+id/tv_create_date_label"
+        android:layout_below="@+id/et_create_input_title"
+        android:layout_alignRight="@+id/tv_create_air_in_label"
+        android:layout_alignEnd="@+id/tv_create_air_in_label" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_time_prompt"
+        android:id="@+id/tv_create_time_in_value"
+        android:layout_alignBottom="@+id/tv_create_time_in_label"
+        android:layout_toRightOf="@+id/tv_create_time_in_label"
+        android:layout_toEndOf="@+id/tv_create_time_in_label" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_air_prompt"
+        android:id="@+id/tv_create_air_in_value"
+        android:layout_alignBottom="@+id/tv_create_air_in_label"
+        android:layout_toRightOf="@+id/tv_create_air_in_label"
+        android:layout_toEndOf="@+id/tv_create_air_in_label" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_time_prompt"
+        android:id="@+id/tv_create_time_out_value"
+        android:layout_alignBottom="@+id/tv_create_time_out_label"
+        android:layout_toRightOf="@+id/tv_create_entry_info_label"
+        android:layout_toEndOf="@+id/tv_create_entry_info_label" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_air_prompt"
+        android:id="@+id/tv_create_air_out_value"
+        android:layout_above="@+id/tv_create_comments_label"
+        android:layout_toRightOf="@+id/tv_create_air_out_label"
+        android:layout_toEndOf="@+id/tv_create_air_out_label" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_date_prompt"
+        android:id="@+id/tv_create_date_value"
+        android:layout_alignTop="@+id/tv_create_date_label"
+        android:layout_toRightOf="@+id/tv_create_air_in_label"
+        android:layout_toEndOf="@+id/tv_create_air_in_label" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ibtn_create_select_time_btn"
+        android:layout_alignBottom="@+id/tv_create_time_in_value"
+        android:layout_toRightOf="@+id/tv_create_time_in_value"
+        android:layout_alignTop="@+id/tv_create_entry_info_label" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ibtn_create_select_air_btn"
+        android:layout_alignBottom="@+id/tv_create_time_out_value"
+        android:layout_alignRight="@+id/tv_create_comments_prompt"
+        android:layout_alignEnd="@+id/tv_create_comments_prompt"
+        android:layout_marginRight="22dp"
+        android:layout_marginEnd="22dp"
+        android:layout_below="@+id/tv_create_air_in_value" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ibtn_create_select_date"
+        android:layout_below="@+id/tv_create_dive_title_label"
+        android:layout_toRightOf="@+id/tv_create_time_in_value"
+        android:layout_above="@+id/create_mapview"
+        android:layout_alignRight="@+id/ibtn_create_select_air_btn"
+        android:layout_alignEnd="@+id/ibtn_create_select_air_btn" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_btm_time"
+        android:id="@+id/tv_create_btm_time_label"
+        android:layout_alignTop="@+id/ibtn_create_select_time_btn"
+        android:layout_toRightOf="@+id/ibtn_create_select_time_btn"
+        android:layout_toEndOf="@+id/ibtn_create_select_time_btn" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_create_btm_time_value"
+        android:layout_alignTop="@+id/tv_create_btm_time_label"
+        android:layout_toRightOf="@+id/tv_create_btm_time_label"
+        android:layout_toEndOf="@+id/tv_create_btm_time_label" />
 
 </RelativeLayout>

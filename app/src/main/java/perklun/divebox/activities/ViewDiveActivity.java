@@ -40,8 +40,24 @@ public class ViewDiveActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_dive);
         dive = getIntent().getParcelableExtra(Constants.DIVE);
-        TextView tvDiveDetailTitle = (TextView)findViewById(R.id.tv_dive_detail_title);
-        tvDiveDetailTitle.setText(dive.getTitle());
+        getSupportActionBar().setTitle(dive.getTitle());
+        loadMap(savedInstanceState);
+        dbHelper = DiveBoxDatabaseHelper.getDbInstance(getApplicationContext());
+        Button btnDeleteDive = (Button) findViewById(R.id.btn_view_delete_dive);
+        btnDeleteDive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int resultCode = dbHelper.deleteDive(dive);
+                Intent i = new Intent();
+                i.putExtra(Constants.DIVE, dive);
+                setResult(resultCode, i);
+                finish();
+            }
+        });
+        loadTextViews(dive);
+    }
+
+    public void loadMap(Bundle savedInstanceState){
         //Load Map
         createMapView = (MapView) findViewById(R.id.view_mapview);
         createMapView.onCreate(savedInstanceState);
@@ -65,17 +81,22 @@ public class ViewDiveActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.LOCATION_UNAVAILABLE, Toast.LENGTH_SHORT).show();
         }
         createMapView.onResume();// needed to get the map to display immediately
-        dbHelper = DiveBoxDatabaseHelper.getDbInstance(getApplicationContext());
-        Button btnDeleteDive = (Button) findViewById(R.id.btn_view_delete_dive);
-        btnDeleteDive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int resultCode = dbHelper.deleteDive(dive);
-                Intent i = new Intent();
-                i.putExtra(Constants.DIVE, dive);
-                setResult(resultCode, i);
-                finish();
-            }
-        });
+    }
+
+    public void loadTextViews(Dive dive){
+        TextView tvViewDate = (TextView) findViewById(R.id.tv_view_date_value);
+        tvViewDate.setText(dive.getDate());
+        TextView tvComment = (TextView) findViewById(R.id.tv_view_comments_value);
+        tvComment.setText(dive.getComments());
+        TextView tvAirIn = (TextView) findViewById(R.id.tv_view_air_in_value);
+        tvAirIn.setText(dive.getAirIn());
+        TextView tvAirOut = (TextView) findViewById(R.id.tv_view_air_out_value);
+        tvAirOut.setText(dive.getAirOut());
+        TextView tvTimeIn = (TextView) findViewById(R.id.tv_view_time_in_value);
+        tvTimeIn.setText(dive.getTimeIn());
+        TextView tvTimeOut = (TextView) findViewById(R.id.tv_view_time_out_value);
+        tvTimeOut.setText(dive.getTimeOut());
+        TextView tvBtmTime = (TextView) findViewById(R.id.tv_view_btm_time_value);
+        tvBtmTime.setText(dive.getBtmTime());
     }
 }

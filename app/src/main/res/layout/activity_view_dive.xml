@@ -9,19 +9,11 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="perklun.divebox.activities.ViewDiveActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_dive_detail_title"/>
-
     <com.google.android.gms.maps.MapView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/view_mapview"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/view_dive_map_dimensions"
-        android:layout_below="@+id/tv_dive_detail_title"
-        android:layout_toRightOf="@+id/tv_dive_detail_title"
-        android:layout_toEndOf="@+id/tv_dive_detail_title" />
+        android:layout_height="@dimen/view_dive_map_dimensions" />
 
     <Button
         android:layout_width="wrap_content"
@@ -31,4 +23,138 @@
         android:layout_below="@+id/view_mapview"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_entry_info"
+        android:id="@+id/tv_view_entry_label"
+        android:layout_below="@+id/tv_view_date_label"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_time_in"
+        android:id="@+id/tv_view_time_in_label"
+        android:layout_below="@+id/tv_view_entry_label"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:id="@+id/tv_view_time_in_value"
+        android:layout_below="@+id/tv_view_entry_label"
+        android:layout_toRightOf="@+id/tv_view_time_in_label"
+        android:layout_toEndOf="@+id/tv_view_time_in_label" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_air_in"
+        android:id="@+id/tv_view_air_in_label"
+        android:layout_below="@+id/tv_view_time_in_value"
+        android:layout_toLeftOf="@+id/tv_view_air_in_value" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_view_air_in_value"
+        android:layout_below="@+id/tv_view_time_in_label"
+        android:layout_alignRight="@+id/tv_view_exit_info_label"
+        android:layout_alignEnd="@+id/tv_view_exit_info_label" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_exit_info"
+        android:id="@+id/tv_view_exit_info_label"
+        android:layout_below="@+id/tv_view_air_in_value"
+        android:layout_alignRight="@+id/btn_view_delete_dive" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_time_out"
+        android:id="@+id/tv_view_time_out_label"
+        android:layout_below="@+id/tv_view_exit_info_label"
+        android:layout_alignRight="@+id/btn_view_delete_dive" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_view_time_out_value"
+        android:layout_alignTop="@+id/tv_view_time_out_label"
+        android:layout_toRightOf="@+id/tv_view_time_out_label"
+        android:layout_toEndOf="@+id/tv_view_time_out_label" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_air_out"
+        android:id="@+id/tv_view_air_out_label"
+        android:layout_below="@+id/tv_view_time_out_value"
+        android:layout_alignRight="@+id/btn_view_delete_dive" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_view_air_out_value"
+        android:layout_above="@+id/tv_view_btm_time_label"
+        android:layout_toRightOf="@+id/tv_view_air_out_label"
+        android:layout_toEndOf="@+id/tv_view_air_out_label" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_comment"
+        android:id="@+id/tv_comments_label"
+        android:layout_below="@+id/tv_view_air_out_value" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_date"
+        android:id="@+id/tv_view_date_label"
+        android:layout_below="@+id/btn_view_delete_dive"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_view_date_value"
+        android:layout_alignTop="@+id/tv_view_date_label"
+        android:layout_toRightOf="@+id/tv_view_date_label"
+        android:layout_toEndOf="@+id/tv_view_date_label" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_view_comments_value"
+        android:layout_below="@+id/tv_comments_label"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_btm_time"
+        android:id="@+id/tv_view_btm_time_label"
+        android:layout_below="@+id/tv_view_air_out_label"
+        android:layout_toRightOf="@+id/tv_comments_label"
+        android:layout_toEndOf="@+id/tv_comments_label"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_view_btm_time_value"
+        android:layout_alignTop="@+id/tv_view_btm_time_label"
+        android:layout_toRightOf="@+id/tv_view_btm_time_label"
+        android:layout_toEndOf="@+id/tv_view_btm_time_label" />
 </RelativeLayout>

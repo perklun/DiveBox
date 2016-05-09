@@ -1,0 +1,30 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <NumberPicker
+        android:id="@+id/np_air_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/btn_select_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/bar"
+        android:layout_below="@+id/np_air_value"
+        android:layout_toRightOf="@+id/np_air_value"
+        android:layout_toEndOf="@+id/np_air_value" />
+
+    <Button
+        android:id="@+id/btn_select_psi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/psi"
+        android:layout_below="@+id/np_air_value"
+        android:layout_toLeftOf="@+id/np_air_value"
+        android:layout_toStartOf="@+id/np_air_value" />
+
+</RelativeLayout>
