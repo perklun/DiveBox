@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/widget_margin"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_widget_time_since_label"
+            android:id="@+id/tv_widget_time_since_label" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_widget_btm_time_label"
+            android:id="@+id/tv_widget_btm_time_label"
+            android:layout_below="@+id/tv_widget_time_since_label"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_widget_no_value"
+            android:id="@+id/tv_widget_time_since_value"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/tv_widget_time_since_label"
+            android:layout_toEndOf="@+id/tv_widget_time_since_label" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_widget_no_value"
+            android:id="@+id/tv_widget_btm_time_value"
+            android:layout_alignTop="@+id/tv_widget_btm_time_label"
+            android:layout_toRightOf="@+id/tv_widget_btm_time_label"
+            android:layout_toEndOf="@+id/tv_widget_btm_time_label" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_widget_depth_label"
+            android:id="@+id/tv_widget_depth_label"
+            android:layout_below="@+id/tv_widget_btm_time_label"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_widget_no_value"
+            android:id="@+id/tv_widget_depth_value"
+            android:layout_alignBottom="@+id/tv_widget_depth_label"
+            android:layout_toRightOf="@+id/tv_widget_depth_label"
+            android:layout_toEndOf="@+id/tv_widget_depth_label" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_widget_ago_label"
+            android:id="@+id/tv_widget_ago"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/tv_widget_time_since_value"
+            android:layout_toEndOf="@+id/tv_widget_time_since_value" />
+    </RelativeLayout>
+
+</FrameLayout>

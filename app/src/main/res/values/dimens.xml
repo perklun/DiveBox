@@ -9,4 +9,8 @@
     <dimen name="ibtn_selelct_dive_cert_height">16dp</dimen>
     <dimen name="ibtn_selelct_dive_cert_width">16dp</dimen>
 
+    <dimen name="widget_margin">8dp</dimen>
+    <dimen name="widget_min_width">110dp</dimen>
+    <dimen name="widget_min_height">40dp</dimen>
+
 </resources>

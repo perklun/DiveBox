@@ -173,7 +173,13 @@ public class CreateDiveActivity extends AppCompatActivity implements GoogleMap.O
             Toast.makeText(this, R.string.MAP_UNAVAILABLE, Toast.LENGTH_SHORT).show();
         }
         googleMap = createMapView.getMap();
-        position = new LatLng(Constants.INVALID_LAT, Constants.INVALID_LONG);
+        double lat = Constants.INVALID_LAT;
+        double lng = Constants.INVALID_LONG;
+        if(savedInstanceState != null){
+            lat = savedInstanceState.getDouble(getString(R.string.create_dive_lat), Constants.INVALID_LAT);
+            lng = savedInstanceState.getDouble(getString(R.string.create_dive_lng), Constants.INVALID_LONG);
+        }
+        position = new LatLng(lat, lng);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(this, R.string.MAP_PERMISSION_UNAVAILABLE, Toast.LENGTH_SHORT).show();
             return;
@@ -188,9 +194,11 @@ public class CreateDiveActivity extends AppCompatActivity implements GoogleMap.O
             Location location = locationManager.getLastKnownLocation(bestProvider);
             defaultMarker = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE);
             if (location != null) {
-                double latitude = location.getLatitude();
-                double longitude = location.getLongitude();
-                position = new LatLng(latitude, longitude);
+                if(lat == Constants.INVALID_LAT || lng == Constants.INVALID_LONG){
+                    double latitude = location.getLatitude();
+                    double longitude = location.getLongitude();
+                    position = new LatLng(latitude, longitude);
+                }
                 mapMarker = googleMap.addMarker(new MarkerOptions()
                         .position(position)
                         .icon(defaultMarker));
@@ -440,5 +448,8 @@ public class CreateDiveActivity extends AppCompatActivity implements GoogleMap.O
         for(TextView tv : textViewToStringKey.keySet()){
             outState.putString(textViewToStringKey.get(tv), tv.getText().toString());
         }
+        //pass marker position
+        outState.putDouble(getString(R.string.create_dive_lat), position.latitude);
+        outState.putDouble(getString(R.string.create_dive_lng), position.longitude);
     }
 }
