@@ -11,6 +11,12 @@ import android.content.Intent;
 public class DiveBoxWidgetProvider extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        super.onUpdate(context, appWidgetManager, appWidgetIds);
+        context.startService(new Intent(context, DiveBoxWidgetIntentService.class));
+    }
+
+    @Override
+    public void onEnabled(Context context) {
+        super.onEnabled(context);
+        context.startService(new Intent(context, DiveBoxWidgetIntentService.class));
     }
 }

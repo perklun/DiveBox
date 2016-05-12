@@ -49,6 +49,9 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyCEfnRQaLgD1PU_ufxzWf-C29B8DYnw598"/>
 
+        <!-- Widget Intent Service -->
+        <service android:name=".widget.DiveBoxWidgetIntentService" />
+
         <receiver android:name=".widget.DiveBoxWidgetProvider" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

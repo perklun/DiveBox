@@ -57,7 +57,8 @@
             android:layout_alignBottom="@+id/tv_dive_cert"
             android:layout_toRightOf="@+id/tv_dive_cert"
             android:layout_toEndOf="@+id/tv_dive_cert"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@mipmap/ic_launcher"
+            android:contentDescription="@string/cd_profile_select_dive_cert"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -111,7 +112,8 @@
             android:src="@mipmap/ic_launcher"
             android:layout_below="@+id/tv_dive_level"
             android:layout_toRightOf="@+id/tv_dive_cert_label"
-            android:layout_toEndOf="@+id/tv_dive_cert_label" />
+            android:layout_toEndOf="@+id/tv_dive_cert_label"
+            android:contentDescription="@string/cd_profile_select_weight"/>
 
     </RelativeLayout>
 

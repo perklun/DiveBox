@@ -10,6 +10,7 @@
     <!-- Buttons -->
     <string name="create_dive_submit">Create Dive</string>
     <string name="delete_dive_submit">Delete Dive</string>
+    <string name="BUTTON_OK">OK</string>
 
     <!-- SharedPref file -->
     <string name="SHARED_PREFERENCE_FILE_KEY">divebox</string>
@@ -79,6 +80,7 @@
     <!-- Date Picker Dialog -->
     <string name="SELECT_DATE">Select Date:</string>
 
+
     <!-- Weight Dialog -->
     <string name="WEIGHT">Weight Preference:</string>
     <string name="WEIGHT_METRIC">Metric:</string>
@@ -130,6 +132,13 @@
     <string name="label_widget_btm_time_label">Bottom Time:</string>
     <string name="label_widget_depth_label">Dive Depth:</string>
     <string name="label_widget_no_value">(No Info)</string>
+
+    <!-- Content Descriptors -->
+    <string name="cd_create_dive_select_date">select date of dive</string>
+    <string name="cd_create_dive_select_time">select time of dive</string>
+    <string name="cd_create_dive_select_air">select air pressure of dive</string>
+    <string name="cd_profile_select_dive_cert">select dive certification</string>
+    <string name="cd_profile_select_weight">select weight preference</string>
 
 
 

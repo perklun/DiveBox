@@ -195,7 +195,8 @@
         android:id="@+id/ibtn_create_select_time_btn"
         android:layout_alignBottom="@+id/tv_create_time_in_value"
         android:layout_toRightOf="@+id/tv_create_time_in_value"
-        android:layout_alignTop="@+id/tv_create_entry_info_label" />
+        android:layout_alignTop="@+id/tv_create_entry_info_label"
+        android:contentDescription="@string/cd_create_dive_select_time"/>
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -206,7 +207,8 @@
         android:layout_alignEnd="@+id/tv_create_comments_prompt"
         android:layout_marginRight="22dp"
         android:layout_marginEnd="22dp"
-        android:layout_below="@+id/tv_create_air_in_value" />
+        android:layout_below="@+id/tv_create_air_in_value"
+        android:contentDescription="@string/cd_create_dive_select_air"/>
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -216,7 +218,8 @@
         android:layout_toRightOf="@+id/tv_create_time_in_value"
         android:layout_above="@+id/create_mapview"
         android:layout_alignRight="@+id/ibtn_create_select_air_btn"
-        android:layout_alignEnd="@+id/ibtn_create_select_air_btn" />
+        android:layout_alignEnd="@+id/ibtn_create_select_air_btn"
+        android:contentDescription="@string/cd_create_dive_select_date"/>
 
     <TextView
         android:layout_width="wrap_content"
