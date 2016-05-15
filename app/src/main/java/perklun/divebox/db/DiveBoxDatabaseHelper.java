@@ -25,7 +25,7 @@ public class DiveBoxDatabaseHelper extends SQLiteOpenHelper{
     private static DiveBoxDatabaseHelper dbInstance;
 
     // Database Info
-    private static final String DATABASE_NAME = "DiveLog";
+    private static final String DATABASE_NAME = "divelog.db";
     private static final int DATABASE_VERSION = 1;
     private static final String TAG = "DBHELPER";
 
