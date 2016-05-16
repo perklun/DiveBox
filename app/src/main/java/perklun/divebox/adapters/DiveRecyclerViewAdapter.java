@@ -1,7 +1,9 @@
 package perklun.divebox.adapters;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,17 +12,17 @@ import android.widget.TextView;
 import java.util.List;
 
 import perklun.divebox.R;
+import perklun.divebox.content_provider.DiveBoxDatabaseContract;
 import perklun.divebox.models.Dive;
 
 /**
  * Created by perklun on 4/23/2016.
  */
-public class DiveRecyclerViewAdapter extends RecyclerView.Adapter<DiveRecyclerViewAdapter.ViewHolder> {
+public class DiveRecyclerViewAdapter extends CursorRecyclerViewAdapter<DiveRecyclerViewAdapter.ViewHolder> {
 
-    private List<Dive> mDives;
 
-    public DiveRecyclerViewAdapter(List<Dive> dives){
-        mDives = dives;
+    public DiveRecyclerViewAdapter(Context context, Cursor cursor) {
+        super(context, cursor);
     }
 
     @Override
@@ -33,16 +35,11 @@ public class DiveRecyclerViewAdapter extends RecyclerView.Adapter<DiveRecyclerVi
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        Dive dive = mDives.get(position);
-        TextView tvDiveTitle = holder.diveTitle;
-        tvDiveTitle.setText(dive.getTitle());
+    public void onBindViewHolder(ViewHolder viewHolder, Cursor cursor) {
+        viewHolder.diveTitle.setText(cursor.getString(cursor.getColumnIndex(DiveBoxDatabaseContract.DiveEntry.KEY_DIVE_TITLE)));
     }
 
-    @Override
-    public int getItemCount() {
-        return mDives.size();
-    }
+
     // Viewholder for dive item
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView diveTitle;

@@ -2,8 +2,12 @@ package perklun.divebox.fragments;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,18 +19,21 @@ import java.util.List;
 import perklun.divebox.R;
 import perklun.divebox.activities.ViewDiveActivity;
 import perklun.divebox.adapters.DiveRecyclerViewAdapter;
+import perklun.divebox.content_provider.DiveBoxDatabaseContract;
 import perklun.divebox.db.DiveBoxDatabaseHelper;
 import perklun.divebox.models.Dive;
 import perklun.divebox.utils.Constants;
 import perklun.divebox.utils.ItemClickSupport;
 
-public class DiveFrag extends Fragment {
+public class DiveFrag extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
     // newInstance constructor for creating fragment with arguments
     RecyclerView diveRecyclerView;
     DiveRecyclerViewAdapter diveRecyclerViewAdapter;
     DiveBoxDatabaseHelper dbHelper;
     List<Dive> divesList;
     private SharedPreferences mSettings;
+    // Identifies a particular Loader being used in this component
+    private static final int DIVE_LOADER = 0;
 
     public static DiveFrag newInstance() {
         DiveFrag fragmentFirst = new DiveFrag();
@@ -40,12 +47,14 @@ public class DiveFrag extends Fragment {
         String googleID = mSettings.getString(getString(R.string.SHARED_PREF_GOOGLE_ID_KEY),"");
         dbHelper = DiveBoxDatabaseHelper.getDbInstance(this.getContext());
         divesList = dbHelper.getAllDives(googleID);
-        diveRecyclerViewAdapter = new DiveRecyclerViewAdapter(divesList);
+        diveRecyclerViewAdapter = new DiveRecyclerViewAdapter(getContext(), null);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //Loader
+        getLoaderManager().initLoader(DIVE_LOADER, null, this);
         View view = inflater.inflate(R.layout.fragment_dive, container, false);
         diveRecyclerView = (RecyclerView) view.findViewById(R.id.recycle_view_dives);
         diveRecyclerView.setAdapter(diveRecyclerViewAdapter);
@@ -66,7 +75,7 @@ public class DiveFrag extends Fragment {
 
     public void addDiveUpdateRecyclerViewAdapter(Dive dive){
         divesList.add(dive);
-        diveRecyclerViewAdapter.notifyItemInserted(divesList.size()-1);
+        getLoaderManager().restartLoader(DIVE_LOADER, null, this);
     }
 
     public void deleteDiveUpdateRecyclerViewAdapter(Dive dive){
@@ -79,7 +88,40 @@ public class DiveFrag extends Fragment {
         }
         if(divePos >= 0){
             divesList.remove(divePos);
-            diveRecyclerViewAdapter.notifyItemRemoved(divePos);
         }
+        getLoaderManager().restartLoader(DIVE_LOADER, null, this);
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        // Define the columns to retrieve
+        switch(id){
+            case DIVE_LOADER:
+                String[] projectionFields = new String[] {
+                        DiveBoxDatabaseContract.DiveEntry.KEY_DIVE_ID,
+                        DiveBoxDatabaseContract.DiveEntry.KEY_DIVE_TITLE};
+                // Construct the loader
+                //TODO: Set selection criteria to user and args, also set sort order
+                return new CursorLoader(
+                        getActivity(),
+                        DiveBoxDatabaseContract.DiveEntry.CONTENT_URI, // URI
+                        projectionFields, // projection fields
+                        null, // the selection criteria
+                        null, // the selection args
+                        null // the sort order
+                );
+            default:
+                return null;
+        }
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        diveRecyclerViewAdapter.changeCursor(data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        diveRecyclerViewAdapter.changeCursor(null);
     }
 }

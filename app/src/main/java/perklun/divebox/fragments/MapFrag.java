@@ -36,7 +36,6 @@ import perklun.divebox.models.Dive;
 public class MapFrag extends Fragment {
     private MapView mapFragMapView;
     private GoogleMap googleMap;
-    DiveRecyclerViewAdapter diveRecyclerViewAdapter;
     DiveBoxDatabaseHelper dbHelper;
     List<Dive> divesList;
     HashMap<Integer, Marker> mapMarkers;
@@ -56,7 +55,6 @@ public class MapFrag extends Fragment {
         String googleID = mSettings.getString(getString(R.string.SHARED_PREF_GOOGLE_ID_KEY),"");
         dbHelper = DiveBoxDatabaseHelper.getDbInstance(this.getContext());
         divesList = dbHelper.getAllDives(googleID);
-        diveRecyclerViewAdapter = new DiveRecyclerViewAdapter(divesList);
         mapMarkers = new HashMap<>();
     }
 
@@ -120,7 +118,7 @@ public class MapFrag extends Fragment {
     public void addDiveUpdateRecyclerViewAdapter(Dive dive){
         divesList.add(dive);
         addMarker(dive.getLatLng(), dive.getTitle(), dive.getId());
-        diveRecyclerViewAdapter.notifyItemInserted(divesList.size()-1);
+        //diveRecyclerViewAdapter.notifyItemInserted(divesList.size()-1);
     }
 
     public void deleteDiveUpdateRecyclerViewAdapter(Dive dive){
@@ -134,7 +132,6 @@ public class MapFrag extends Fragment {
         if(divePos >= 0){
             divesList.remove(divePos);
             removeMarker(dive.getId());
-            diveRecyclerViewAdapter.notifyItemRemoved(divePos);
         }
     }
 
