@@ -34,6 +34,7 @@ public class DiveFrag extends Fragment implements LoaderManager.LoaderCallbacks<
     private SharedPreferences mSettings;
     // Identifies a particular Loader being used in this component
     private static final int DIVE_LOADER = 0;
+    private String googleId;
 
     public static DiveFrag newInstance() {
         DiveFrag fragmentFirst = new DiveFrag();
@@ -44,9 +45,9 @@ public class DiveFrag extends Fragment implements LoaderManager.LoaderCallbacks<
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mSettings = getActivity().getSharedPreferences(getString(R.string.SHARED_PREFERENCE_FILE_KEY),0);
-        String googleID = mSettings.getString(getString(R.string.SHARED_PREF_GOOGLE_ID_KEY),"");
+        googleId = mSettings.getString(getString(R.string.SHARED_PREF_GOOGLE_ID_KEY),"");
         dbHelper = DiveBoxDatabaseHelper.getDbInstance(this.getContext());
-        divesList = dbHelper.getAllDives(googleID);
+        divesList = dbHelper.getAllDives(googleId);
         diveRecyclerViewAdapter = new DiveRecyclerViewAdapter(getContext(), null);
     }
 
@@ -100,13 +101,16 @@ public class DiveFrag extends Fragment implements LoaderManager.LoaderCallbacks<
                 String[] projectionFields = new String[] {
                         DiveBoxDatabaseContract.DiveEntry.KEY_DIVE_ID,
                         DiveBoxDatabaseContract.DiveEntry.KEY_DIVE_TITLE};
+                String[] selectionArgs = new String[]{
+                        googleId
+                };
                 // Construct the loader
                 //TODO: Set selection criteria to user and args, also set sort order
                 return new CursorLoader(
                         getActivity(),
                         DiveBoxDatabaseContract.DiveEntry.CONTENT_URI, // URI
                         projectionFields, // projection fields
-                        null, // the selection criteria
+                        null, // the selection criteria (always need to filter by user id)
                         null, // the selection args
                         null // the sort order
                 );

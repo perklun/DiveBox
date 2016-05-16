@@ -14,6 +14,7 @@ public class DiveBoxDatabaseContract {
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
     public static final String PATH_DIVE = "dive";
+    public static final String PATH_LAST_DIVE = "last_dive";
     public static final String PATH_USER = "user";
 
     public static final class DiveEntry implements BaseColumns {
@@ -42,6 +43,10 @@ public class DiveBoxDatabaseContract {
         // Define a function to build a URI to find a specific movie by it's identifier
         public static Uri buildDiveUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
+
+        public static Uri buildLastDiveUri() {
+            return CONTENT_URI.buildUpon().appendPath(PATH_LAST_DIVE).build();
         }
     }
 

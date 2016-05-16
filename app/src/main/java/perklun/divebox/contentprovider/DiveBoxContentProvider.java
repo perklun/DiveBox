@@ -14,10 +14,11 @@ import perklun.divebox.db.DiveBoxDatabaseHelper;
 /**
  * Created by perklun on 5/15/2016.
  */
-public class DiveBoxProvider extends ContentProvider {
+public class DiveBoxContentProvider extends ContentProvider {
 
     private static final int DIVE = 100;
     private static final int DIVE_ID = 101;
+    private static final int LAST_DIVE = 102;
     private static final int USER = 200;
     private static final int USER_ID = 201;
 
@@ -35,6 +36,7 @@ public class DiveBoxProvider extends ContentProvider {
         UriMatcher uriMatcher = new UriMatcher((UriMatcher.NO_MATCH));
         uriMatcher.addURI(content, DiveBoxDatabaseContract.PATH_DIVE, DIVE);
         uriMatcher.addURI(content, DiveBoxDatabaseContract.PATH_DIVE + "/#", DIVE_ID);
+        uriMatcher.addURI(content, DiveBoxDatabaseContract.PATH_DIVE + "/" + DiveBoxDatabaseContract.PATH_LAST_DIVE, LAST_DIVE);
         uriMatcher.addURI(content, DiveBoxDatabaseContract.PATH_USER, USER);
         uriMatcher.addURI(content, DiveBoxDatabaseContract.PATH_USER + "/#", USER_ID);
         return uriMatcher;
@@ -49,7 +51,7 @@ public class DiveBoxProvider extends ContentProvider {
             case DIVE:
                 retCursor = db.query(DiveBoxDatabaseContract.DiveEntry.TABLE_DIVES,
                         projection,
-                        selection,
+selection,
                         selectionArgs,
                         null,
                         null,
@@ -64,6 +66,17 @@ public class DiveBoxProvider extends ContentProvider {
                         null,
                         null,
                         sortOrder);
+                break;
+            case LAST_DIVE:
+                retCursor = db.query(DiveBoxDatabaseContract.DiveEntry.TABLE_DIVES,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        DiveBoxDatabaseContract.DiveEntry.KEY_DIVE_ID + " DESC",
+                        "1");
+                break;
             case USER:
                 retCursor = db.query(DiveBoxDatabaseContract.UserEntry.TABLE_USERS,
                         projection,

@@ -15,5 +15,6 @@ public class Constants {
     public static final double INVALID_LONG = 100;
     public static final String INVALID_TIME = "-1";
     public static final String CREATE_DIVE_HASH_MAP = "hash_map";
+    public static final String WIDGET_GOOGLE_ID = "googleId";
 
 }

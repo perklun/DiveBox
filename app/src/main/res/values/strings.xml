@@ -128,7 +128,7 @@
 
     <!--Widget Labels -->
     <string name="label_widget_time_since_label">Last Dive:</string>
-    <string name="label_widget_ago_label"> ago</string>
+    <string name="label_widget_ago_label">ago</string>
     <string name="label_widget_btm_time_label">Bottom Time:</string>
     <string name="label_widget_depth_label">Dive Depth:</string>
     <string name="label_widget_no_value">(No Info)</string>
