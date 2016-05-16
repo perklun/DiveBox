@@ -1,4 +1,4 @@
-package perklun.divebox.content_provider;
+package perklun.divebox.contentprovider;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;

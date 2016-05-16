@@ -22,7 +22,7 @@ import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.support.v7.widget.RecyclerView;
 
-import perklun.divebox.content_provider.DiveBoxDatabaseContract;
+import perklun.divebox.contentprovider.DiveBoxDatabaseContract;
 
 /**
  * Created by skyfishjy on 10/31/14.

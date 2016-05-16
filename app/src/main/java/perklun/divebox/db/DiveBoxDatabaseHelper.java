@@ -13,7 +13,7 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 import java.util.List;
 
-import perklun.divebox.content_provider.DiveBoxDatabaseContract;
+import perklun.divebox.contentprovider.DiveBoxDatabaseContract;
 import perklun.divebox.models.Dive;
 import perklun.divebox.models.User;
 import perklun.divebox.utils.Constants;

@@ -19,7 +19,7 @@ import java.util.List;
 import perklun.divebox.R;
 import perklun.divebox.activities.ViewDiveActivity;
 import perklun.divebox.adapters.DiveRecyclerViewAdapter;
-import perklun.divebox.content_provider.DiveBoxDatabaseContract;
+import perklun.divebox.contentprovider.DiveBoxDatabaseContract;
 import perklun.divebox.db.DiveBoxDatabaseHelper;
 import perklun.divebox.models.Dive;
 import perklun.divebox.utils.Constants;

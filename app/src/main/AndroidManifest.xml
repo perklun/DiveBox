@@ -22,7 +22,7 @@
         android:theme="@style/AppTheme"
         android:name=".utils.DiveBoxApplication">
         <provider
-            android:name=".content_provider.DiveBoxProvider"
+            android:name=".contentprovider.DiveBoxProvider"
             android:authorities="perklun.divebox.diveboxdatabase" />
         <activity
             android:name=".activities.LoginActivity"
