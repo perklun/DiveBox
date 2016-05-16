@@ -11,7 +11,7 @@ android {
         config {
             keyAlias 'DiveBox'
             keyPassword 'divebox'
-            storeFile file('C:/Users/perklun/Documents/keystore/divebox.jks')
+            storeFile file('keystore/divebox.jks')
             storePassword 'divebox'
         }
     }
